@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>⚡ Fizika test | O'zgarmas tok</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #0a1a2b;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        /* Telefon qutisi */
+        .phone-frame {
+            width: 100%;
+            max-width: 400px; /* Telefon kengligi */
+            background: linear-gradient(165deg, #0b1f30 0%, #12344d 100%);
+            border-radius: 36px;
+            padding: 18px 14px;
+            border: 2px solid #2d7fc1;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 3px #1b4f7a, 0 0 20px #0088ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fizik fon effekti */
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, #0055aa20 0%, transparent 50%),
+                        repeating-linear-gradient(45deg, #ffffff05 0px, #ffffff05 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+        }
+
+        /* Header - telefon uchun ixcham */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0c263b;
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 1px solid #3894d6;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+            box-shadow: inset 0 2px 5px #00000055, 0 5px 0 #0a1929;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .title h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 8px #00a6ff;
+        }
+
+        .title span {
+            background: #0055b3;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid #6bc8ff;
+            color: white;
+        }
+
+        .score-box {
+            background: #0f2e44;
+            padding: 6px 15px;
+            border-radius: 30px;
+            border: 1px solid #f0b840;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .score-box span:first-child {
+            color: #ffdb8e;
+            font-size: 0.9rem;
+        }
+
+        .score-box span:last-child {
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* Progress bar - ixcham */
+        .progress {
+            background: #0b253a;
+            border-radius: 30px;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #3174b0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #b3d9ff;
+            margin-bottom: 5px;
+        }
+
+        .bar-bg {
+            background: #1f3f58;
+            height: 16px;
+            border-radius: 30px;
+            border: 1px solid #2a6da0;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #2effa0, #ffd966);
+            border-radius: 30px;
+            transition: width 0.3s;
+        }
+
+        /* Savol kartasi */
+        .question-card {
+            background: #0d263f;
+            border-radius: 30px;
+            padding: 20px 16px;
+            border: 2px solid #3f93df;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 0 #0a1e30;
+        }
+
+        .q-badge {
+            background: #003a70;
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            border: 1px solid #79c2ff;
+            margin-bottom: 15px;
+        }
+
+        .q-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #f0f9ff;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            border-left: 4px solid #ffaa33;
+            padding-left: 12px;
+        }
+
+        /* Variantlar - telefon uchun bir ustun */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background: #112f47;
+            border: 2px solid #2d7fc1;
+            border-radius: 40px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 5px 0 #0b1f32;
+        }
+
+        .option:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #0b1f32;
+        }
+
+        .option-prefix {
+            width: 45px;
+            height: 45px;
+            background: #004b97;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            border: 2px solid #9aceff;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            font-size: 1.1rem;
+            color: #e7f3ff;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* Tanlangan variantlar */
+        .option.correct {
+            background: #0e6a3c;
+            border-color: #3effa3;
+            box-shadow: 0 5px 0 #064e2b;
+        }
+
+        .option.wrong {
+            background: #8b2525;
+            border-color: #ff7b7b;
+            box-shadow: 0 5px 0 #5e1919;
+        }
+
+        .option.correct .option-prefix {
+            background: #1e8f5e;
+            border-color: #b5ffd6;
+        }
+
+        .option.wrong .option-prefix {
+            background: #a13e3e;
+            border-color: #ffbaba;
+        }
+
+        /* Navigatsiya tugmalari */
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-btn {
+            flex: 1;
+            background: #153e5a;
+            border: none;
+            border-radius: 40px;
+            padding: 16px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            border: 2px solid #3894d6;
+            box-shadow: 0 6px 0 #0a263a;
+            cursor: pointer;
+            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .nav-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #0a263a;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            transform: none;
+            box-shadow: 0 4px 0 #0a263a;
+            pointer-events: none;
+        }
+
+        .restart-btn {
+            background: #1f3f55;
+            border-color: #f9b952;
+            flex: 0.7;
+        }
+
+        .footer {
+            text-align: center;
+            color: #5b9fd6;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed #2f6b99;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Telefon uchun qo'shimcha optimizatsiya */
+        @media (max-width: 380px) {
+            .phone-frame {
+                padding: 12px 10px;
+            }
+            .title h1 {
+                font-size: 1.3rem;
+            }
+            .q-text {
+                font-size: 1.1rem;
+            }
+            .option-prefix {
+                width: 38px;
+                height: 38px;
+                font-size: 1.3rem;
+            }
+            .option-text {
+                font-size: 1rem;
+            }
+            .nav-btn {
+                padding: 14px 0;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <!-- Header -->
+        <div class="header">
+            <div class="title">
+                <h1>⚡Fizika</h1>
+                <span>2 ball</span>
+            </div>
+            <div class="score-box">
+                <span>ball</span>
+                <span id="ballDisplay">0</span>
+            </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="progress">
+            <div class="progress-row">
+                <span>🔋 <span id="currentAmp">0.0</span> A</span>
+                <span id="questionCounter">1/25</span>
+            </div>
+            <div class="bar-bg">
+                <div class="bar-fill" id="progressFill" style="width: 4%;"></div>
+            </div>
+        </div>
+
+        <!-- Savol -->
+        <div class="question-card">
+            <div class="q-badge" id="questionBadge">1-savol</div>
+            <div class="q-text" id="questionText">Yuklanmoqda...</div>
+            <div class="options" id="optionsContainer"></div>
+        </div>
+
+        <!-- Tugmalar -->
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn" disabled>◀ Old</button>
+            <button class="nav-btn" id="nextBtn">Keyingi ▶</button>
+            <button class="nav-btn restart-btn" id="restartBtn">🔄 Qayta</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            I = U/R  |  P = I²R
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 25 ta test savollari
+            const questions = [
+                { // 1
+                    question: "Elektr toki nima?",
+                    options: ["A) Elektr maydon", "B) Elektronlarning tartibli harakati", "C) Magnit oqim", "D) Yorug‘lik nuri"],
+                    correct: 1
+                },
+                { // 2
+                    question: "Tok kuchining birligi:",
+                    options: ["A) Volt", "B) Om", "C) Amper", "D) Vatt"],
+                    correct: 2
+                },
+                { // 3
+                    question: "DC tokning xususiyati:",
+                    options: ["A) Yo‘nalishi o‘zgaradi", "B) Yo‘nalishi o‘zgarmaydi", "C) Magnit maydon hosil qilmaydi", "D) Kuchlanish nol"],
+                    correct: 1
+                },
+                { // 4
+                    question: "Uy rozetkasidagi tok turi:",
+                    options: ["A) DC", "B) AC", "C) Impulsli", "D) Statik"],
+                    correct: 1
+                },
+                { // 5
+                    question: "Telefon batareyasi qanday tok beradi?",
+                    options: ["A) AC", "B) DC", "C) 220V", "D) 50Hz"],
+                    correct: 1
+                },
+                { // 6
+                    question: "Om qonuni formulasi:",
+                    options: ["A) P = UI", "B) I = U/R", "C) R = UI", "D) U = IR²"],
+                    correct: 1
+                },
+                { // 7
+                    question: "Qarshilik birligi:",
+                    options: ["A) Volt", "B) Vatt", "C) Om", "D) Amper"],
+                    correct: 2
+                },
+                { // 8
+                    question: "Agar kuchlanish oshsa (R o‘zgarmasa), tok:",
+                    options: ["A) Kamayadi", "B) O‘zgarmaydi", "C) Oshadi", "D) Nol bo‘ladi"],
+                    correct: 2
+                },
+                { // 9
+                    question: "Quvvat formulasi:",
+                    options: ["A) P = IR", "B) P = UI", "C) P = U/R", "D) P = I/R"],
+                    correct: 1
+                },
+                { // 10
+                    question: "5V va 2A telefon quvvati:",
+                    options: ["A) 7W", "B) 10W", "C) 15W", "D) 2W"],
+                    correct: 1
+                },
+                { // 11
+                    question: "Agar kabel qarshiligi katta bo‘lsa:",
+                    options: ["A) Tok oshadi", "B) Tok kamayadi", "C) Kabel soviydi", "D) Volt oshadi"],
+                    correct: 1
+                },
+                { // 12
+                    question: "Kabel qizishi qaysi formulaga bog‘liq?",
+                    options: ["A) P = UI", "B) P = I²R", "C) P = U/R", "D) P = IR"],
+                    correct: 1
+                },
+                { // 13
+                    question: "Qisqa tutashuv nima?",
+                    options: ["A) Kuchlanish oshishi", "B) Qarshilik nolga yaqinlashishi", "C) Tok kamayishi", "D) Quvvat nol"],
+                    correct: 1
+                },
+                { // 14
+                    question: "Nima uchun energiya yuqori volt bilan uzatiladi?",
+                    options: ["A) Tokni oshirish uchun", "B) Tokni kamaytirish uchun", "C) Qarshilikni oshirish uchun", "D) Magnitni kamaytirish uchun"],
+                    correct: 1
+                },
+                { // 15
+                    question: "220V rozetka to‘g‘ridan-to‘g‘ri telefonni nima qiladi?",
+                    options: ["A) Zaryadlaydi", "B) Sekin ishlaydi", "C) Kuydiradi", "D) Sovutadi"],
+                    correct: 2
+                },
+                { // 16
+                    question: "Server oddiy kompyuterdan ko‘proq tok tortish sababi:",
+                    options: ["A) Dizayni boshqacha", "B) Katta yuklama va ko‘p komponent", "C) Rangi qora", "D) Internet tezligi"],
+                    correct: 1
+                },
+                { // 17
+                    question: "AC tokning afzalligi:",
+                    options: ["A) Uzoqqa uzatish qulay", "B) Faqat batareyada ishlaydi", "C) Qarshiliksiz", "D) Doimiy"],
+                    correct: 0
+                },
+                { // 18
+                    question: "220V va 5A qurilma quvvati:",
+                    options: ["A) 225W", "B) 1100W", "C) 500W", "D) 100W"],
+                    correct: 1
+                },
+                { // 19
+                    question: "DC tok qayerda ishlatiladi?",
+                    options: ["A) Elektr stansiya uzatishda", "B) Telefon va kompyuter ichida", "C) Uzoq masofada", "D) Transformator ichida"],
+                    correct: 1
+                },
+                { // 20
+                    question: "Elektr energiya yo‘qotilishi asosan qayerda yuz beradi?",
+                    options: ["A) Kuchlanishda", "B) Qarshilikda", "C) Amperda", "D) Magnitda"],
+                    correct: 1
+                },
+                { // 21
+                    question: "Agar R = 20 Ω va U = 220 V bo‘lsa, tok kuchi nechaga teng?",
+                    options: ["A) 5 A", "B) 10 A", "C) 11 A", "D) 4 A"],
+                    correct: 2
+                },
+                { // 22
+                    question: "5 Ω qarshilikdan 4 A tok o‘tsa, kuchlanish qancha?",
+                    options: ["A) 10 V", "B) 20 V", "C) 15 V", "D) 25 V"],
+                    correct: 1
+                },
+                { // 23
+                    question: "220 V tarmoqqa ulangan 1100 W qurilma nechta amper tok tortadi?",
+                    options: ["A) 2 A", "B) 3 A", "C) 5 A", "D) 10 A"],
+                    correct: 2
+                },
+                { // 24
+                    question: "Qarshilik ikki marta oshsa (U o‘zgarmasa), tok:",
+                    options: ["A) Ikki marta oshadi", "B) O‘zgarmaydi", "C) Ikki marta kamayadi", "D) Nol bo‘ladi"],
+                    correct: 2
+                },
+                { // 25
+                    question: "10 A tok o‘tayotgan kabelda R = 2 Ω bo‘lsa, issiqlik quvvati qancha?",
+                    options: ["A) 20 W", "B) 100 W", "C) 200 W", "D) 50 W"],
+                    correct: 2
+                }
+            ];
+
+            const BALL_PER = 2;
+            const total = questions.length;
+
+            // State
+            let currentIndex = 0;
+            let userAnswers = new Array(total).fill(null);
+            let answerStatus = new Array(total).fill(null);
+
+            // DOM
+            const ballDisplay = document.getElementById('ballDisplay');
+            const currentAmp = document.getElementById('currentAmp');
+            const questionCounter = document.getElementById('questionCounter');
+            const progressFill = document.getElementById('progressFill');
+            const questionBadge = document.getElementById('questionBadge');
+            const questionText = document.getElementById('questionText');
+            const optionsDiv = document.getElementById('optionsContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const restartBtn = document.getElementById('restartBtn');
+
+            function calcBall() {
+                return answerStatus.filter(s => s === 'correct').length * BALL_PER;
+            }
+
+            function updateUI() {
+                const ball = calcBall();
+                ballDisplay.innerText = ball;
+                
+                const correctCount = answerStatus.filter(s => s === 'correct').length;
+                const amp = (ball / (total * BALL_PER) * 20).toFixed(1);
+                currentAmp.innerText = amp;
+                
+                questionCounter.innerText = `${currentIndex + 1}/${total}`;
+                
+                const progress = ((currentIndex + 1) / total) * 100;
+                progressFill.style.width = progress + '%';
+            }
+
+            function selectOption(idx) {
+                if (userAnswers[currentIndex] !== null) return;
+
+                const q = questions[currentIndex];
+                const isCorrect = (idx === q.correct);
+                userAnswers[currentIndex] = idx;
+                answerStatus[currentIndex] = isCorrect ? 'correct' : 'wrong';
+
+                renderQuestion();
+                updateUI();
+            }
+
+            function renderQuestion() {
+                const q = questions[currentIndex];
+                questionBadge.innerText = `${currentIndex + 1}-savol`;
+                questionText.innerText = q.question;
+
+                const selected = userAnswers[currentIndex];
+                const status = answerStatus[currentIndex];
+                const letters = ['A', 'B', 'C', 'D'];
+
+                let html = '';
+                q.options.forEach((opt, idx) => {
+                    let optClass = 'option';
+                    if (selected !== null && idx === selected) {
+                        optClass += status === 'correct' ? ' correct' : ' wrong';
+                    }
+                    html += `
+                        <div class="${optClass}" data-index="${idx}">
+                            <span class="option-prefix">${letters[idx]}</span>
+                            <span class="option-text">${opt}</span>
+                        </div>
+                    `;
+                });
+
+                optionsDiv.innerHTML = html;
+
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const idx = opt.dataset.index;
+                        if (idx) selectOption(parseInt(idx));
+                    });
+                });
+
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.innerText = currentIndex === total - 1 ? '🏁 Yakun' : 'Keyingi ▶';
+            }
+
+            function goNext() {
+                if (currentIndex < total - 1) {
+                    currentIndex++;
+                    renderQuestion();
+                    updateUI();
+                } else {
+                    const ball = calcBall();
+                    alert(`⚡ Test tugadi!\n\nBall: ${ball} / ${total * BALL_PER}\nTo'g'ri: ${answerStatus.filter(s => s === 'correct').length} / ${total}`);
+                }
+            }
+
+            function goPrev() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    renderQuestion();
+                    updateUI();
+                }
+            }
+
+            function restart() {
+                if (confirm("Qayta boshlash?")) {
+                    userAnswers = new Array(total).fill(null);
+                    answerStatus = new Array(total).fill(null);
+                    currentIndex = 0;
+                    renderQuestion();
+                    updateUI();
+                }
+            }
+
+            nextBtn.addEventListener('click', goNext);
+            prevBtn.addEventListener('click', goPrev);
+            restartBtn.addEventListener('click', restart);
+
+            // Boshlash
+            renderQuestion();
+            updateUI();
+        })();
+    </script>
+</body>
+</html>
