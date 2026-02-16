@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>⚡ Fizika test | O'zgarmas tok</title>
+    <title>⚡ Fizika test | 7 kunlik deadline</title>
     <style>
         * {
             margin: 0;
@@ -24,30 +24,17 @@
         /* Telefon qutisi */
         .phone-frame {
             width: 100%;
-            max-width: 400px; /* Telefon kengligi */
+            max-width: 400px;
             background: linear-gradient(165deg, #0b1f30 0%, #12344d 100%);
             border-radius: 36px;
             padding: 18px 14px;
             border: 2px solid #2d7fc1;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 3px #1b4f7a, 0 0 20px #0088ff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 3px #1b4f7a;
             position: relative;
             overflow: hidden;
         }
 
-        /* Fizik fon effekti */
-        .phone-frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 40%, #0055aa20 0%, transparent 50%),
-                        repeating-linear-gradient(45deg, #ffffff05 0px, #ffffff05 2px, transparent 2px, transparent 8px);
-            pointer-events: none;
-        }
-
-        /* Header - telefon uchun ixcham */
+        /* Header */
         .header {
             display: flex;
             align-items: center;
@@ -57,15 +44,7 @@
             border-radius: 40px;
             border: 1px solid #3894d6;
             margin-bottom: 16px;
-            position: relative;
-            z-index: 2;
             box-shadow: inset 0 2px 5px #00000055, 0 5px 0 #0a1929;
-        }
-
-        .title {
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .title h1 {
@@ -75,14 +54,227 @@
             text-shadow: 0 0 8px #00a6ff;
         }
 
-        .title span {
-            background: #0055b3;
-            padding: 4px 10px;
+        /* Deadline tugmasi va timer */
+        .deadline-section {
+            background: #0b253a;
             border-radius: 30px;
-            font-size: 0.9rem;
+            padding: 15px;
+            margin-bottom: 16px;
+            border: 2px solid #ffaa33;
+            position: relative;
+        }
+
+        .deadline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .deadline-title {
+            color: #ffb347;
             font-weight: 600;
-            border: 1px solid #6bc8ff;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .start-deadline-btn {
+            background: #ffaa33;
+            border: none;
+            border-radius: 40px;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0a1a2b;
+            border: 2px solid #ffd966;
+            box-shadow: 0 5px 0 #b36b00;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .start-deadline-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #b36b00;
+        }
+
+        .start-deadline-btn:disabled {
+            opacity: 0.5;
+            transform: none;
+            box-shadow: 0 5px 0 #b36b00;
+            pointer-events: none;
+        }
+
+        .timer-box {
+            background: #0f2e44;
+            border-radius: 30px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #ff9933;
+        }
+
+        .timer-label {
+            color: #ffdb8e;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .timer-value {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #ffd966;
+            text-shadow: 0 0 20px #ff9900;
+            font-family: monospace;
+            letter-spacing: 3px;
+        }
+
+        .timer-value.expired {
+            color: #ff6b6b;
+            text-shadow: 0 0 20px #ff0000;
+        }
+
+        .timer-note {
+            color: #8bb9ff;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        /* Bloklangan xabar */
+        .blocked-message {
+            background: #8b2525;
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 3px solid #ff7b7b;
+            margin: 20px 0;
+        }
+
+        .blocked-message h2 {
             color: white;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .blocked-message p {
+            color: #ffbaba;
+            font-size: 1.1rem;
+        }
+
+        /* Login qismi */
+        .login-section {
+            background: #0d263f;
+            border-radius: 30px;
+            padding: 25px 20px;
+            border: 2px solid #3f93df;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 0 #0a1e30;
+        }
+
+        .login-section h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #b3d9ff;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 18px;
+            background: #112f47;
+            border: 2px solid #2d7fc1;
+            border-radius: 40px;
+            font-size: 1rem;
+            color: white;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #ffaa33;
+        }
+
+        .input-group input::placeholder {
+            color: #5f8db0;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #0e6a3c;
+            border: none;
+            border-radius: 40px;
+            padding: 18px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            border: 2px solid #3effa3;
+            box-shadow: 0 6px 0 #064e2b;
+            cursor: pointer;
+            transition: 0.1s;
+            margin-top: 10px;
+        }
+
+        .login-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #064e2b;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.5;
+            transform: none;
+            box-shadow: 0 4px 0 #064e2b;
+            pointer-events: none;
+        }
+
+        .error-message {
+            color: #ff7b7b;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Test qismi */
+        .test-section {
+            display: none;
+        }
+
+        .test-section.active {
+            display: block;
+        }
+
+        .test-section.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Student info */
+        .student-info {
+            background: #0f2e44;
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: 1px solid #f0b840;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #ffdb8e;
+        }
+
+        .student-name-header {
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .score-box {
@@ -106,15 +298,12 @@
             font-size: 1.5rem;
         }
 
-        /* Progress bar - ixcham */
+        /* Progress */
         .progress {
             background: #0b253a;
             border-radius: 30px;
             padding: 8px 12px;
             margin-bottom: 16px;
-            border: 1px solid #3174b0;
-            position: relative;
-            z-index: 2;
         }
 
         .progress-row {
@@ -148,8 +337,6 @@
             padding: 20px 16px;
             border: 2px solid #3f93df;
             margin-bottom: 16px;
-            position: relative;
-            z-index: 2;
             box-shadow: 0 8px 0 #0a1e30;
         }
 
@@ -175,7 +362,7 @@
             padding-left: 12px;
         }
 
-        /* Variantlar - telefon uchun bir ustun */
+        /* Variantlar */
         .options {
             display: flex;
             flex-direction: column;
@@ -200,6 +387,11 @@
             box-shadow: 0 2px 0 #0b1f32;
         }
 
+        .option.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
         .option-prefix {
             width: 45px;
             height: 45px;
@@ -222,7 +414,6 @@
             line-height: 1.3;
         }
 
-        /* Tanlangan variantlar */
         .option.correct {
             background: #0e6a3c;
             border-color: #3effa3;
@@ -245,13 +436,11 @@
             border-color: #ffbaba;
         }
 
-        /* Navigatsiya tugmalari */
+        /* Navigatsiya */
         .nav-buttons {
             display: flex;
             gap: 8px;
             margin-top: 20px;
-            position: relative;
-            z-index: 2;
         }
 
         .nav-btn {
@@ -267,10 +456,6 @@
             box-shadow: 0 6px 0 #0a263a;
             cursor: pointer;
             transition: 0.1s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
         }
 
         .nav-btn:active {
@@ -285,10 +470,99 @@
             pointer-events: none;
         }
 
-        .restart-btn {
-            background: #1f3f55;
-            border-color: #f9b952;
-            flex: 0.7;
+        .next-btn {
+            background: #0e6a3c;
+            border-color: #3effa3;
+        }
+
+        .finish-btn {
+            background: #b3660e;
+            border-color: #ffaa33;
+        }
+
+        /* Natijalar oynasi */
+        .results-section {
+            display: none;
+            background: #0d263f;
+            border-radius: 30px;
+            padding: 25px 20px;
+            border: 3px solid #ffaa33;
+            margin-top: 20px;
+            box-shadow: 0 8px 0 #0a1e30;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .results-header h2 {
+            color: #ffd966;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .results-header p {
+            color: #b3d9ff;
+            font-size: 1.1rem;
+        }
+
+        .result-card {
+            background: #112f47;
+            border-radius: 30px;
+            padding: 25px;
+            border: 2px solid #3f93df;
+            margin-bottom: 25px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 2px dashed #2f6b99;
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #b3d9ff;
+            font-size: 1.1rem;
+        }
+
+        .result-value {
+            color: #ffd966;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .student-name-result {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .screenshot-note {
+            background: #0b253a;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            color: #8bb9ff;
+            font-size: 0.95rem;
+            border: 2px dashed #ffaa33;
+        }
+
+        .screenshot-note span {
+            color: #ffd966;
+            font-weight: 600;
         }
 
         .footer {
@@ -298,33 +572,6 @@
             margin-top: 15px;
             padding-top: 12px;
             border-top: 1px dashed #2f6b99;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Telefon uchun qo'shimcha optimizatsiya */
-        @media (max-width: 380px) {
-            .phone-frame {
-                padding: 12px 10px;
-            }
-            .title h1 {
-                font-size: 1.3rem;
-            }
-            .q-text {
-                font-size: 1.1rem;
-            }
-            .option-prefix {
-                width: 38px;
-                height: 38px;
-                font-size: 1.3rem;
-            }
-            .option-text {
-                font-size: 1rem;
-            }
-            .nav-btn {
-                padding: 14px 0;
-                font-size: 1rem;
-            }
         }
     </style>
 </head>
@@ -333,38 +580,111 @@
         <!-- Header -->
         <div class="header">
             <div class="title">
-                <h1>⚡Fizika</h1>
-                <span>2 ball</span>
+                <h1>⚡Fizika test</h1>
             </div>
-            <div class="score-box">
-                <span>ball</span>
-                <span id="ballDisplay">0</span>
-            </div>
-        </div>
-
-        <!-- Progress bar -->
-        <div class="progress">
-            <div class="progress-row">
-                <span>🔋 <span id="currentAmp">0.0</span> A</span>
-                <span id="questionCounter">1/25</span>
-            </div>
-            <div class="bar-bg">
-                <div class="bar-fill" id="progressFill" style="width: 4%;"></div>
+            <div class="student-info" id="studentInfo" style="display: none;">
+                <span>👤</span>
+                <span class="student-name-header" id="headerStudentName"></span>
             </div>
         </div>
 
-        <!-- Savol -->
-        <div class="question-card">
-            <div class="q-badge" id="questionBadge">1-savol</div>
-            <div class="q-text" id="questionText">Yuklanmoqda...</div>
-            <div class="options" id="optionsContainer"></div>
+        <!-- Deadline qismi -->
+        <div class="deadline-section" id="deadlineSection">
+            <div class="deadline-header">
+                <span class="deadline-title">⏰ 7 kunlik deadline</span>
+                <button class="start-deadline-btn" id="startDeadlineBtn">▶ START DEADLINE</button>
+            </div>
+            <div class="timer-box" id="timerBox" style="display: none;">
+                <div class="timer-label">Qolgan vaqt:</div>
+                <div class="timer-value" id="timerDisplay">7 kun</div>
+                <div class="timer-note" id="timerNote">Hamma uchun umumiy vaqt</div>
+            </div>
         </div>
 
-        <!-- Tugmalar -->
-        <div class="nav-buttons">
-            <button class="nav-btn" id="prevBtn" disabled>◀ Old</button>
-            <button class="nav-btn" id="nextBtn">Keyingi ▶</button>
-            <button class="nav-btn restart-btn" id="restartBtn">🔄 Qayta</button>
+        <!-- Bloklangan xabar -->
+        <div class="blocked-message" id="blockedMessage" style="display: none;">
+            <h2>⛔ TEST BLOKLANGAN</h2>
+            <p>7 kunlik muddat tugadi</p>
+            <p style="font-size: 0.9rem; margin-top: 15px;">Admin bilan bog'lanishingiz mumkin</p>
+        </div>
+
+        <!-- Login qismi -->
+        <div class="login-section" id="loginSection">
+            <h2>✍️ Ro'yxatdan o'tish</h2>
+            <div class="input-group">
+                <label>Ismingiz</label>
+                <input type="text" id="firstName" placeholder="Masalan: Abror" maxlength="30">
+            </div>
+            <div class="input-group">
+                <label>Familyangiz</label>
+                <input type="text" id="lastName" placeholder="Masalan: Abdullayev" maxlength="30">
+            </div>
+            <button class="login-btn" id="loginBtn">Testni boshlash</button>
+            <div class="error-message" id="loginError"></div>
+        </div>
+
+        <!-- Test qismi -->
+        <div class="test-section" id="testSection">
+            <!-- Progress bar -->
+            <div class="progress">
+                <div class="progress-row">
+                    <span>🔋 <span id="currentAmp">0.0</span> A</span>
+                    <span id="questionCounter">1/25</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" id="progressFill" style="width: 4%;"></div>
+                </div>
+            </div>
+
+            <!-- Savol -->
+            <div class="question-card">
+                <div class="q-badge" id="questionBadge">1-savol</div>
+                <div class="q-text" id="questionText">Yuklanmoqda...</div>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+
+            <!-- Tugmalar -->
+            <div class="nav-buttons">
+                <button class="nav-btn" id="prevBtn" disabled>◀ Oldingi</button>
+                <button class="nav-btn next-btn" id="nextBtn">Keyingi ▶</button>
+            </div>
+        </div>
+
+        <!-- Natijalar oynasi -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2>📊 TEST NATIJALARI</h2>
+                <p>Quyidagi ma'lumotlarni skrinshot qiling</p>
+            </div>
+            
+            <div class="result-card">
+                <div class="student-name-result" id="resultFullName">Abror Abdullayev</div>
+                
+                <div class="result-row">
+                    <span class="result-label">To'plangan ball:</span>
+                    <span class="result-value" id="resultBall">0 / 50</span>
+                </div>
+                
+                <div class="result-row">
+                    <span class="result-label">To'g'ri javoblar:</span>
+                    <span class="result-value" id="resultCorrect">0 / 25</span>
+                </div>
+                
+                <div class="result-row">
+                    <span class="result-label">Noto'g'ri javoblar:</span>
+                    <span class="result-value" id="resultWrong">0</span>
+                </div>
+                
+                <div class="result-row">
+                    <span class="result-label">Foiz:</span>
+                    <span class="result-value" id="resultPercent">0%</span>
+                </div>
+            </div>
+            
+            <div class="screenshot-note">
+                <span>📸 Skrinshot oling</span><br>
+                va ustozingizga yuboring
+            </div>
         </div>
 
         <!-- Footer -->
@@ -504,42 +824,252 @@
                 }
             ];
 
+            // Konstantalar
             const BALL_PER = 2;
             const total = questions.length;
+            const DEADLINE_KEY = 'exam_deadline_start';
+            const STUDENT_KEY = 'exam_student_data';
+            const TEST_COMPLETED_KEY = 'exam_completed_';
+            const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
-            // State
+            // DOM elementlar
+            const startBtn = document.getElementById('startDeadlineBtn');
+            const timerBox = document.getElementById('timerBox');
+            const timerDisplay = document.getElementById('timerDisplay');
+            const timerNote = document.getElementById('timerNote');
+            const blockedMessage = document.getElementById('blockedMessage');
+            const loginSection = document.getElementById('loginSection');
+            const testSection = document.getElementById('testSection');
+            const resultsSection = document.getElementById('resultsSection');
+            const studentInfo = document.getElementById('studentInfo');
+            const headerStudentName = document.getElementById('headerStudentName');
+            
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginError = document.getElementById('loginError');
+
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+
+            // Test state
             let currentIndex = 0;
             let userAnswers = new Array(total).fill(null);
             let answerStatus = new Array(total).fill(null);
+            let timerInterval = null;
+            let currentStudent = null;
 
-            // DOM
-            const ballDisplay = document.getElementById('ballDisplay');
-            const currentAmp = document.getElementById('currentAmp');
-            const questionCounter = document.getElementById('questionCounter');
-            const progressFill = document.getElementById('progressFill');
-            const questionBadge = document.getElementById('questionBadge');
-            const questionText = document.getElementById('questionText');
-            const optionsDiv = document.getElementById('optionsContainer');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const restartBtn = document.getElementById('restartBtn');
+            // Deadline holatini tekshirish
+            function checkDeadline() {
+                const startTime = localStorage.getItem(DEADLINE_KEY);
+                
+                if (!startTime) {
+                    startBtn.disabled = false;
+                    timerBox.style.display = 'none';
+                    blockedMessage.style.display = 'none';
+                    return false;
+                }
 
+                const now = Date.now();
+                const endTime = parseInt(startTime) + SEVEN_DAYS_MS;
+                const timeLeft = endTime - now;
+
+                if (timeLeft <= 0) {
+                    timerBox.style.display = 'block';
+                    timerDisplay.textContent = '0k 00:00:00';
+                    timerDisplay.classList.add('expired');
+                    timerNote.textContent = 'Muddat tugadi';
+                    blockedMessage.style.display = 'block';
+                    loginSection.style.display = 'none';
+                    testSection.classList.remove('active');
+                    resultsSection.classList.remove('active');
+                    studentInfo.style.display = 'none';
+                    startBtn.disabled = true;
+                    
+                    if (timerInterval) clearInterval(timerInterval);
+                    return false;
+                } else {
+                    timerBox.style.display = 'block';
+                    timerDisplay.classList.remove('expired');
+                    timerNote.textContent = 'Hamma uchun umumiy vaqt';
+                    blockedMessage.style.display = 'none';
+                    startBtn.disabled = true;
+                    
+                    startTimer(endTime);
+                    return true;
+                }
+            }
+
+            // Timerni yangilash
+            function startTimer(endTime) {
+                if (timerInterval) clearInterval(timerInterval);
+                
+                timerInterval = setInterval(() => {
+                    const now = Date.now();
+                    const timeLeft = endTime - now;
+
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerDisplay.textContent = '0k 00:00:00';
+                        timerDisplay.classList.add('expired');
+                        timerNote.textContent = 'Muddat tugadi';
+                        blockedMessage.style.display = 'block';
+                        loginSection.style.display = 'none';
+                        testSection.classList.remove('active');
+                        resultsSection.classList.remove('active');
+                        studentInfo.style.display = 'none';
+                        return;
+                    }
+
+                    const days = Math.floor(timeLeft / (24 * 60 * 60 * 1000));
+                    const hours = Math.floor((timeLeft % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+                    const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
+                    const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
+
+                    timerDisplay.textContent = `${days}k ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+
+            // Deadline boshlash
+            function startDeadline() {
+                const now = Date.now();
+                localStorage.setItem(DEADLINE_KEY, now.toString());
+                checkDeadline();
+            }
+
+            // Talaba ma'lumotlarini saqlash
+            function saveStudentData(first, last) {
+                const studentId = `${first}_${last}`.toLowerCase().replace(/\s+/g, '_');
+                const studentData = {
+                    firstName: first,
+                    lastName: last,
+                    studentId: studentId,
+                    startTime: Date.now(),
+                    completed: false
+                };
+                localStorage.setItem(STUDENT_KEY, JSON.stringify(studentData));
+                return studentData;
+            }
+
+            // Talaba test topshirganligini tekshirish
+            function hasStudentCompleted(studentId) {
+                return localStorage.getItem(TEST_COMPLETED_KEY + studentId) === 'true';
+            }
+
+            // Testni yakunlash va natijalarni saqlash
+            function completeTest() {
+                if (!currentStudent) return;
+
+                const studentId = currentStudent.studentId;
+                const ball = calcBall();
+                const correct = answerStatus.filter(s => s === 'correct').length;
+                const wrong = total - correct;
+                const percent = Math.round((correct / total) * 100);
+
+                // Natijalarni saqlash
+                const results = {
+                    studentName: `${currentStudent.firstName} ${currentStudent.lastName}`,
+                    ball: ball,
+                    correct: correct,
+                    wrong: wrong,
+                    percent: percent,
+                    total: total,
+                    maxBall: total * BALL_PER,
+                    timestamp: Date.now()
+                };
+                
+                localStorage.setItem(TEST_COMPLETED_KEY + studentId, 'true');
+                localStorage.setItem('exam_results_' + studentId, JSON.stringify(results));
+
+                // Natijalarni ko'rsatish
+                showResults(results);
+            }
+
+            // Natijalarni ko'rsatish
+            function showResults(results) {
+                testSection.classList.remove('active');
+                loginSection.style.display = 'none';
+                resultsSection.classList.add('active');
+                
+                document.getElementById('resultFullName').textContent = results.studentName;
+                document.getElementById('resultBall').textContent = `${results.ball} / ${results.maxBall}`;
+                document.getElementById('resultCorrect').textContent = `${results.correct} / ${results.total}`;
+                document.getElementById('resultWrong').textContent = results.wrong;
+                document.getElementById('resultPercent').textContent = results.percent + '%';
+            }
+
+            // Loginni tekshirish
+            function handleLogin() {
+                const first = firstName.value.trim();
+                const last = lastName.value.trim();
+
+                if (!first || !last) {
+                    loginError.textContent = 'Iltimos, ism va familyani kiriting';
+                    return;
+                }
+
+                const studentId = `${first}_${last}`.toLowerCase().replace(/\s+/g, '_');
+
+                // Deadline tekshirish
+                if (!checkDeadline()) {
+                    loginError.textContent = 'Test vaqti tugagan';
+                    return;
+                }
+
+                // Talaba avval test topshirganmi?
+                if (hasStudentCompleted(studentId)) {
+                    loginError.textContent = 'Siz allaqachon test topshirgansiz!';
+                    
+                    // Avvalgi natijalarni ko'rsatish
+                    const savedResults = localStorage.getItem('exam_results_' + studentId);
+                    if (savedResults) {
+                        loginSection.style.display = 'none';
+                        showResults(JSON.parse(savedResults));
+                    }
+                    return;
+                }
+
+                // Yangi talaba
+                currentStudent = saveStudentData(first, last);
+                
+                // Headerda ismni ko'rsatish
+                headerStudentName.textContent = `${first} ${last}`;
+                studentInfo.style.display = 'flex';
+                
+                // Loginni yashirib, testni ko'rsatish
+                loginSection.style.display = 'none';
+                testSection.classList.add('active');
+                
+                // Testni boshlash
+                renderQuestion();
+                updateUI();
+            }
+
+            // Test funksiyalari
             function calcBall() {
                 return answerStatus.filter(s => s === 'correct').length * BALL_PER;
             }
 
             function updateUI() {
                 const ball = calcBall();
-                ballDisplay.innerText = ball;
                 
                 const correctCount = answerStatus.filter(s => s === 'correct').length;
                 const amp = (ball / (total * BALL_PER) * 20).toFixed(1);
-                currentAmp.innerText = amp;
+                document.getElementById('currentAmp').innerText = amp;
                 
-                questionCounter.innerText = `${currentIndex + 1}/${total}`;
+                document.getElementById('questionCounter').innerText = `${currentIndex + 1}/${total}`;
                 
                 const progress = ((currentIndex + 1) / total) * 100;
-                progressFill.style.width = progress + '%';
+                document.getElementById('progressFill').style.width = progress + '%';
+
+                // Oxirgi savol bo'lsa, "Keyingi" tugmasi matnini "Yakunlash" ga o'zgartirish
+                if (currentIndex === total - 1) {
+                    nextBtn.textContent = '🏁 Testni yakunlash';
+                    nextBtn.classList.add('finish-btn');
+                } else {
+                    nextBtn.textContent = 'Keyingi ▶';
+                    nextBtn.classList.remove('finish-btn');
+                }
             }
 
             function selectOption(idx) {
@@ -556,8 +1086,8 @@
 
             function renderQuestion() {
                 const q = questions[currentIndex];
-                questionBadge.innerText = `${currentIndex + 1}-savol`;
-                questionText.innerText = q.question;
+                document.getElementById('questionBadge').innerText = `${currentIndex + 1}-savol`;
+                document.getElementById('questionText').innerText = q.question;
 
                 const selected = userAnswers[currentIndex];
                 const status = answerStatus[currentIndex];
@@ -577,7 +1107,7 @@
                     `;
                 });
 
-                optionsDiv.innerHTML = html;
+                document.getElementById('optionsContainer').innerHTML = html;
 
                 document.querySelectorAll('.option').forEach(opt => {
                     opt.addEventListener('click', () => {
@@ -587,17 +1117,26 @@
                 });
 
                 prevBtn.disabled = currentIndex === 0;
-                nextBtn.innerText = currentIndex === total - 1 ? '🏁 Yakun' : 'Keyingi ▶';
             }
 
             function goNext() {
-                if (currentIndex < total - 1) {
+                // Oxirgi savol bo'lsa, testni yakunlash
+                if (currentIndex === total - 1) {
+                    // Agar oxirgi savolga javob berilmagan bo'lsa
+                    if (userAnswers[currentIndex] === null) {
+                        alert('Iltimos, avval bu savolga javob bering!');
+                        return;
+                    }
+                    completeTest();
+                } else {
+                    // Keyingi savolga o'tish
+                    if (userAnswers[currentIndex] === null) {
+                        alert('Iltimos, avval bu savolga javob bering!');
+                        return;
+                    }
                     currentIndex++;
                     renderQuestion();
                     updateUI();
-                } else {
-                    const ball = calcBall();
-                    alert(`⚡ Test tugadi!\n\nBall: ${ball} / ${total * BALL_PER}\nTo'g'ri: ${answerStatus.filter(s => s === 'correct').length} / ${total}`);
                 }
             }
 
@@ -609,23 +1148,28 @@
                 }
             }
 
-            function restart() {
-                if (confirm("Qayta boshlash?")) {
-                    userAnswers = new Array(total).fill(null);
-                    answerStatus = new Array(total).fill(null);
-                    currentIndex = 0;
-                    renderQuestion();
-                    updateUI();
-                }
-            }
-
+            // Event listenerlar
+            startBtn.addEventListener('click', startDeadline);
+            loginBtn.addEventListener('click', handleLogin);
             nextBtn.addEventListener('click', goNext);
             prevBtn.addEventListener('click', goPrev);
-            restartBtn.addEventListener('click', restart);
 
-            // Boshlash
-            renderQuestion();
-            updateUI();
+            // Enter bilan kirish
+            [firstName, lastName].forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') handleLogin();
+                });
+            });
+
+            // Sahifa yuklanganda deadline tekshirish
+            checkDeadline();
+            
+            // LocalStorage o'zgarishini kuzatish
+            window.addEventListener('storage', function(e) {
+                if (e.key === DEADLINE_KEY) {
+                    checkDeadline();
+                }
+            });
         })();
     </script>
 </body>
