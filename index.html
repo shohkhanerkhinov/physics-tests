@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>⚡ Fizika test | Admin panel</title>
+    <title>⚡ Fizika test | 7 kunlik deadline</title>
     <style>
         /* (CSS avvalgi bilan bir xil) */
         * {
@@ -51,201 +51,6 @@
             font-weight: 600;
             color: #fff;
             text-shadow: 0 0 8px #00a6ff;
-        }
-
-        /* Admin kirish tugmasi */
-        .admin-login-btn {
-            background: #2a4055;
-            color: #ffaa33;
-            border: 2px solid #ffaa33;
-            border-radius: 40px;
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .admin-login-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Admin login modal */
-        .admin-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .admin-modal.active {
-            display: flex;
-        }
-
-        .admin-modal-content {
-            background: #0d263f;
-            border-radius: 40px;
-            padding: 30px 25px;
-            border: 3px solid #ffaa33;
-            max-width: 350px;
-            width: 100%;
-        }
-
-        .admin-modal h2 {
-            color: #ffaa33;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-        }
-
-        .admin-modal input {
-            width: 100%;
-            padding: 18px;
-            background: #112f47;
-            border: 2px solid #2d7fc1;
-            border-radius: 40px;
-            font-size: 1rem;
-            color: white;
-            margin-bottom: 20px;
-            outline: none;
-        }
-
-        .admin-modal input:focus {
-            border-color: #ffaa33;
-        }
-
-        .admin-modal-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .admin-modal-btn {
-            flex: 1;
-            padding: 16px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .admin-modal-btn.login {
-            background: #ffaa33;
-            color: #0a1a2b;
-        }
-
-        .admin-modal-btn.cancel {
-            background: #8b2525;
-            color: white;
-        }
-
-        .admin-modal-btn:active {
-            transform: translateY(3px);
-        }
-
-        .admin-error {
-            color: #ff7b7b;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        /* ADMIN PANELI */
-        .admin-section {
-            display: none;
-            background: #1a2f45;
-            border-radius: 30px;
-            padding: 15px;
-            margin-bottom: 16px;
-            border: 3px solid #ff4444;
-            position: relative;
-        }
-
-        .admin-section.active {
-            display: block;
-        }
-
-        .admin-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: #ff8888;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .admin-badge {
-            background: #ff4444;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-        }
-
-        .admin-logout {
-            background: #8b2525;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        .admin-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .admin-btn {
-            flex: 1;
-            min-width: 100px;
-            background: #2a4055;
-            border: none;
-            border-radius: 40px;
-            padding: 12px 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: white;
-            border: 2px solid #ff8888;
-            box-shadow: 0 4px 0 #8b0000;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .admin-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #8b0000;
-        }
-
-        .admin-btn.danger {
-            background: #8b0000;
-            border-color: #ffaaaa;
-        }
-
-        .admin-btn.success {
-            background: #0e6a3c;
-            border-color: #3effa3;
-        }
-
-        .admin-status {
-            margin-top: 12px;
-            padding: 8px;
-            background: #0f2e44;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #ffdb8e;
-            text-align: center;
         }
 
         .deadline-section {
@@ -325,11 +130,6 @@
         .timer-value.expired {
             color: #ff6b6b;
             text-shadow: 0 0 20px #ff0000;
-        }
-
-        .timer-value.paused {
-            color: #ffaa33;
-            text-shadow: 0 0 20px #ff6600;
         }
 
         .timer-note {
@@ -735,57 +535,17 @@
             <div class="title">
                 <h1>⚡Fizika test</h1>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
-                <div class="student-info" id="studentInfo" style="display: none;">
-                    <span>👤</span>
-                    <span class="student-name-header" id="headerStudentName"></span>
-                </div>
-                <div class="admin-login-btn" id="adminLoginBtn">🔑 Admin</div>
-            </div>
-        </div>
-
-        <!-- Admin login modal -->
-        <div class="admin-modal" id="adminModal">
-            <div class="admin-modal-content">
-                <h2>🔐 Admin panel</h2>
-                <input type="password" id="adminPassword" placeholder="Parolni kiriting" autocomplete="off">
-                <div class="admin-modal-buttons">
-                    <button class="admin-modal-btn login" id="adminLoginConfirm">Kirish</button>
-                    <button class="admin-modal-btn cancel" id="adminLoginCancel">Bekor</button>
-                </div>
-                <div class="admin-error" id="adminLoginError"></div>
-            </div>
-        </div>
-
-        <!-- ADMIN PANELI (faqat admin uchun) -->
-        <div class="admin-section" id="adminSection">
-            <div class="admin-header">
-                <span>
-                    <span>🔧 ADMIN PANELI</span>
-                    <span class="admin-badge">FAOL</span>
-                </span>
-                <button class="admin-logout" id="adminLogoutBtn">Chiqish</button>
-            </div>
-            <div class="admin-buttons">
-                <button class="admin-btn success" id="set7DaysBtn">📅 7 kun</button>
-                <button class="admin-btn" id="set3DaysBtn">📅 3 kun</button>
-                <button class="admin-btn" id="set1DayBtn">📅 1 kun</button>
-                <button class="admin-btn" id="addHourBtn">➕ 1 soat</button>
-                <button class="admin-btn" id="pauseTimerBtn">⏸️ Pauza</button>
-                <button class="admin-btn" id="resumeTimerBtn">▶️ Davom</button>
-                <button class="admin-btn danger" id="stopTimerBtn">⛔ To'xtat</button>
-                <button class="admin-btn danger" id="resetAllBtn">🔄 Reset</button>
-            </div>
-            <div class="admin-status" id="adminStatus">
-                Admin: Vaqtni boshqarish
+            <div class="student-info" id="studentInfo" style="display: none;">
+                <span>👤</span>
+                <span class="student-name-header" id="headerStudentName"></span>
             </div>
         </div>
 
         <!-- Deadline qismi -->
         <div class="deadline-section" id="deadlineSection">
             <div class="deadline-header">
-                <span class="deadline-title">⏰ Deadline</span>
-                <button class="start-deadline-btn" id="startDeadlineBtn">▶ START</button>
+                <span class="deadline-title">⏰ 7 kunlik deadline</span>
+                <button class="start-deadline-btn" id="startDeadlineBtn">▶ START DEADLINE</button>
             </div>
             <div class="timer-box" id="timerBox" style="display: none;">
                 <div class="timer-label">Qolgan vaqt:</div>
@@ -797,8 +557,8 @@
         <!-- Bloklangan xabar -->
         <div class="blocked-message" id="blockedMessage" style="display: none;">
             <h2>⛔ TEST BLOKLANGAN</h2>
-            <p>Muddat tugadi</p>
-            <p style="font-size: 0.9rem; margin-top: 15px;" id="blockedMessageText">Admin bilan bog'lanishingiz mumkin</p>
+            <p>7 kunlik muddat tugadi</p>
+            <p style="font-size: 0.9rem; margin-top: 15px;">Admin bilan bog'lanishingiz mumkin</p>
         </div>
 
         <!-- Login qismi -->
@@ -818,6 +578,7 @@
 
         <!-- Test qismi -->
         <div class="test-section" id="testSection">
+            <!-- Progress bar -->
             <div class="progress">
                 <div class="progress-row">
                     <span>🔋 <span id="currentAmp">0.0</span> A</span>
@@ -828,12 +589,14 @@
                 </div>
             </div>
 
+            <!-- Savol -->
             <div class="question-card">
                 <div class="q-badge" id="questionBadge">1-savol</div>
                 <div class="q-text" id="questionText">Yuklanmoqda...</div>
                 <div class="options" id="optionsContainer"></div>
             </div>
 
+            <!-- Tugmalar -->
             <div class="nav-buttons">
                 <button class="nav-btn" id="prevBtn" disabled>◀ Oldingi</button>
                 <button class="nav-btn next-btn" id="nextBtn">Keyingi ▶</button>
@@ -877,6 +640,7 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
             I = U/R  |  P = I²R
         </div>
@@ -884,7 +648,7 @@
 
     <script>
         (function() {
-            // 25 ta test savollari
+            // 25 ta test savollari (ASL SAVOLLAR)
             const originalQuestions = [
                 { // 1
                     question: "Elektr toki nima?",
@@ -1017,15 +781,9 @@
             const BALL_PER = 2;
             const total = originalQuestions.length;
             const DEADLINE_KEY = 'exam_deadline_start';
-            const DEADLINE_PAUSED_KEY = 'exam_deadline_paused';
-            const PAUSED_TIME_KEY = 'exam_paused_time';
-            const ADMIN_KEY = 'exam_admin_logged';
             const STUDENT_KEY = 'exam_student_data';
             const TEST_COMPLETED_KEY = 'exam_completed_';
             const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-            const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
-            const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-            const ADMIN_PASSWORD = "admin123"; // ADMIN PAROLI
 
             // DOM elementlar
             const startBtn = document.getElementById('startDeadlineBtn');
@@ -1033,7 +791,6 @@
             const timerDisplay = document.getElementById('timerDisplay');
             const timerNote = document.getElementById('timerNote');
             const blockedMessage = document.getElementById('blockedMessage');
-            const blockedMessageText = document.getElementById('blockedMessageText');
             const loginSection = document.getElementById('loginSection');
             const testSection = document.getElementById('testSection');
             const resultsSection = document.getElementById('resultsSection');
@@ -1048,82 +805,38 @@
             const nextBtn = document.getElementById('nextBtn');
             const prevBtn = document.getElementById('prevBtn');
 
-            // Admin elementlari
-            const adminLoginBtn = document.getElementById('adminLoginBtn');
-            const adminModal = document.getElementById('adminModal');
-            const adminPassword = document.getElementById('adminPassword');
-            const adminLoginConfirm = document.getElementById('adminLoginConfirm');
-            const adminLoginCancel = document.getElementById('adminLoginCancel');
-            const adminLoginError = document.getElementById('adminLoginError');
-            const adminSection = document.getElementById('adminSection');
-            const adminLogoutBtn = document.getElementById('adminLogoutBtn');
-            const adminStatus = document.getElementById('adminStatus');
-            const set7DaysBtn = document.getElementById('set7DaysBtn');
-            const set3DaysBtn = document.getElementById('set3DaysBtn');
-            const set1DayBtn = document.getElementById('set1DayBtn');
-            const addHourBtn = document.getElementById('addHourBtn');
-            const pauseTimerBtn = document.getElementById('pauseTimerBtn');
-            const resumeTimerBtn = document.getElementById('resumeTimerBtn');
-            const stopTimerBtn = document.getElementById('stopTimerBtn');
-            const resetAllBtn = document.getElementById('resetAllBtn');
-
             // Test state
             let currentIndex = 0;
             let userAnswers = new Array(total).fill(null);
             let answerStatus = new Array(total).fill(null);
             let timerInterval = null;
             let currentStudent = null;
-            let isPaused = false;
-            let pausedEndTime = null;
+            
+            // HAR BIR FOYDALANUVCHI UCHUN ARALASHTIRILGAN SAVOLLAR
             let shuffledQuestions = [];
 
-            // Admin holatini tekshirish
-            function checkAdminStatus() {
-                const isAdmin = localStorage.getItem(ADMIN_KEY) === 'true';
-                if (isAdmin) {
-                    adminSection.classList.add('active');
-                } else {
-                    adminSection.classList.remove('active');
-                }
-                return isAdmin;
-            }
-
-            // Admin login
-            function adminLogin() {
-                const password = adminPassword.value.trim();
-                if (password === ADMIN_PASSWORD) {
-                    localStorage.setItem(ADMIN_KEY, 'true');
-                    adminModal.classList.remove('active');
-                    adminPassword.value = '';
-                    adminLoginError.textContent = '';
-                    checkAdminStatus();
-                } else {
-                    adminLoginError.textContent = '❌ Parol noto\'g\'ri';
-                }
-            }
-
-            // Admin logout
-            function adminLogout() {
-                localStorage.removeItem(ADMIN_KEY);
-                checkAdminStatus();
-            }
-
-            // SAVOLLARNI ARALASHTIRISH
+            // SAVOLLARNI ARALASHTIRISH FUNKSIYASI
             function shuffleQuestionsForUser() {
+                // Har bir savol uchun variantlarni aralashtirish
                 return originalQuestions.map(q => {
+                    // Asl variantlarni va to'g'ri javob indeksini olish
                     const originalOptions = [...q.options];
                     const correctIndex = q.correct;
+                    const correctText = originalOptions[correctIndex];
                     
+                    // Variantlarni aralashtirish uchun indekslar bilan obyekt yaratish
                     const optionObjects = originalOptions.map((text, idx) => ({
                         text: text,
                         isCorrect: idx === correctIndex
                     }));
                     
+                    // Fisher-Yates aralashtirish algoritmi
                     for (let i = optionObjects.length - 1; i > 0; i--) {
                         const j = Math.floor(Math.random() * (i + 1));
                         [optionObjects[i], optionObjects[j]] = [optionObjects[j], optionObjects[i]];
                     }
                     
+                    // Yangi variantlar va to'g'ri javob indeksini topish
                     const newOptions = optionObjects.map(obj => obj.text);
                     const newCorrectIndex = optionObjects.findIndex(obj => obj.isCorrect);
                     
@@ -1135,15 +848,19 @@
                 });
             }
 
+            // FOYDALANUVCHI UCHUN SAVOLLARNI SAQLASH
             function getUserQuestions(studentId) {
                 const storageKey = `shuffled_questions_${studentId}`;
                 let questions = localStorage.getItem(storageKey);
                 
                 if (questions) {
+                    // Agar foydalanuvchi uchun avval aralashtirilgan savollar bo'lsa
                     return JSON.parse(questions);
                 } else {
+                    // Yangi foydalanuvchi uchun savollarni aralashtirish
                     const newShuffledQuestions = shuffleQuestionsForUser();
                     localStorage.setItem(storageKey, JSON.stringify(newShuffledQuestions));
+                    console.log(`Yangi foydalanuvchi uchun savollar aralashtirildi: ${studentId}`);
                     return newShuffledQuestions;
                 }
             }
@@ -1157,32 +874,11 @@
                     startBtn.style.display = 'block';
                     timerBox.style.display = 'none';
                     blockedMessage.style.display = 'none';
-                    if (checkAdminStatus()) adminStatus.textContent = 'Admin: Deadline boshlanmagan';
                     return false;
                 }
 
-                const isPausedNow = localStorage.getItem(DEADLINE_PAUSED_KEY) === 'true';
-                
-                if (isPausedNow) {
-                    const pausedTime = localStorage.getItem(PAUSED_TIME_KEY);
-                    if (pausedTime) {
-                        const timeLeft = parseInt(pausedTime);
-                        startBtn.disabled = true;
-                        startBtn.style.display = 'none';
-                        timerBox.style.display = 'block';
-                        timerDisplay.classList.add('paused');
-                        timerDisplay.classList.remove('expired');
-                        timerNote.textContent = 'VAQT PAUZADA';
-                        blockedMessage.style.display = 'none';
-                        
-                        updateTimerDisplay(timeLeft);
-                        if (checkAdminStatus()) adminStatus.textContent = 'Admin: Vaqt pauzada';
-                        return true;
-                    }
-                }
-
                 const now = Date.now();
-                const endTime = parseInt(startTime);
+                const endTime = parseInt(startTime) + SEVEN_DAYS_MS;
                 const timeLeft = endTime - now;
 
                 if (timeLeft <= 0) {
@@ -1191,40 +887,33 @@
                     timerBox.style.display = 'block';
                     timerDisplay.textContent = '0k 00:00:00';
                     timerDisplay.classList.add('expired');
-                    timerDisplay.classList.remove('paused');
                     timerNote.textContent = 'Muddat tugadi';
                     blockedMessage.style.display = 'block';
                     loginSection.style.display = 'none';
                     testSection.classList.remove('active');
                     resultsSection.classList.remove('active');
                     studentInfo.style.display = 'none';
-                    blockedMessageText.textContent = 'Admin tomonidan to\'xtatilgan';
                     
                     if (timerInterval) clearInterval(timerInterval);
-                    if (checkAdminStatus()) adminStatus.textContent = 'Admin: Vaqt tugagan';
                     return false;
                 } else {
                     startBtn.disabled = true;
                     startBtn.style.display = 'none';
                     timerBox.style.display = 'block';
-                    timerDisplay.classList.remove('expired', 'paused');
+                    timerDisplay.classList.remove('expired');
                     timerNote.textContent = 'Hamma uchun umumiy vaqt';
                     blockedMessage.style.display = 'none';
                     
                     startTimer(endTime);
-                    if (checkAdminStatus()) adminStatus.textContent = 'Admin: Vaqt ishlayapti';
                     return true;
                 }
             }
 
+            // Timerni yangilash
             function startTimer(endTime) {
                 if (timerInterval) clearInterval(timerInterval);
                 
                 timerInterval = setInterval(() => {
-                    if (localStorage.getItem(DEADLINE_PAUSED_KEY) === 'true') {
-                        return;
-                    }
-                    
                     const now = Date.now();
                     const timeLeft = endTime - now;
 
@@ -1241,104 +930,29 @@
                         return;
                     }
 
-                    updateTimerDisplay(timeLeft);
+                    const days = Math.floor(timeLeft / (24 * 60 * 60 * 1000));
+                    const hours = Math.floor((timeLeft % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+                    const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
+                    const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
+
+                    timerDisplay.textContent = `${days}k ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 }, 1000);
             }
 
-            function updateTimerDisplay(timeLeft) {
-                const days = Math.floor(timeLeft / (24 * 60 * 60 * 1000));
-                const hours = Math.floor((timeLeft % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-                const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
-                const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
-
-                timerDisplay.textContent = `${days}k ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
-
+            // Deadline boshlash
             function startDeadline() {
-                const now = Date.now() + SEVEN_DAYS_MS;
+                const now = Date.now();
                 localStorage.setItem(DEADLINE_KEY, now.toString());
-                localStorage.removeItem(DEADLINE_PAUSED_KEY);
-                localStorage.removeItem(PAUSED_TIME_KEY);
+                console.log('Deadline boshlandi:', new Date(now).toLocaleString());
                 
                 startBtn.disabled = true;
                 startBtn.style.display = 'none';
                 timerBox.style.display = 'block';
                 
                 checkDeadline();
-                if (checkAdminStatus()) adminStatus.textContent = 'Admin: 7 kunlik deadline boshlandi';
             }
 
-            // ADMIN FUNKSIYALARI
-            function setDeadline(days) {
-                if (!checkAdminStatus()) return;
-                const now = Date.now() + (days * 24 * 60 * 60 * 1000);
-                localStorage.setItem(DEADLINE_KEY, now.toString());
-                localStorage.removeItem(DEADLINE_PAUSED_KEY);
-                localStorage.removeItem(PAUSED_TIME_KEY);
-                checkDeadline();
-                adminStatus.textContent = `Admin: ${days} kunlik deadline o'rnatildi`;
-            }
-
-            function addHour() {
-                if (!checkAdminStatus()) return;
-                const startTime = localStorage.getItem(DEADLINE_KEY);
-                if (startTime) {
-                    const newTime = parseInt(startTime) + (60 * 60 * 1000);
-                    localStorage.setItem(DEADLINE_KEY, newTime.toString());
-                    localStorage.removeItem(DEADLINE_PAUSED_KEY);
-                    checkDeadline();
-                    adminStatus.textContent = 'Admin: 1 soat qo\'shildi';
-                }
-            }
-
-            function pauseTimer() {
-                if (!checkAdminStatus()) return;
-                const startTime = localStorage.getItem(DEADLINE_KEY);
-                if (startTime) {
-                    const timeLeft = parseInt(startTime) - Date.now();
-                    if (timeLeft > 0) {
-                        localStorage.setItem(DEADLINE_PAUSED_KEY, 'true');
-                        localStorage.setItem(PAUSED_TIME_KEY, timeLeft.toString());
-                        if (timerInterval) clearInterval(timerInterval);
-                        timerDisplay.classList.add('paused');
-                        timerNote.textContent = 'VAQT PAUZADA';
-                        adminStatus.textContent = 'Admin: Vaqt pauzalandi';
-                    }
-                }
-            }
-
-            function resumeTimer() {
-                if (!checkAdminStatus()) return;
-                const pausedTime = localStorage.getItem(PAUSED_TIME_KEY);
-                if (pausedTime) {
-                    const newEndTime = Date.now() + parseInt(pausedTime);
-                    localStorage.setItem(DEADLINE_KEY, newEndTime.toString());
-                    localStorage.removeItem(DEADLINE_PAUSED_KEY);
-                    localStorage.removeItem(PAUSED_TIME_KEY);
-                    checkDeadline();
-                    adminStatus.textContent = 'Admin: Vaqt davom ettirildi';
-                }
-            }
-
-            function stopTimer() {
-                if (!checkAdminStatus()) return;
-                const now = Date.now() - 1000;
-                localStorage.setItem(DEADLINE_KEY, now.toString());
-                localStorage.removeItem(DEADLINE_PAUSED_KEY);
-                localStorage.removeItem(PAUSED_TIME_KEY);
-                checkDeadline();
-                adminStatus.textContent = 'Admin: Vaqt to\'xtatildi';
-            }
-
-            function resetAll() {
-                if (!checkAdminStatus()) return;
-                if (confirm('Hamma ma\'lumotlar o\'chadi. Davom etasizmi?')) {
-                    localStorage.clear();
-                    location.reload();
-                }
-            }
-
-            // Talaba funksiyalari
+            // Talaba ma'lumotlarini saqlash
             function saveStudentData(first, last) {
                 const studentId = `${first}_${last}`.toLowerCase().replace(/\s+/g, '_');
                 const studentData = {
@@ -1352,10 +966,12 @@
                 return studentData;
             }
 
+            // Talaba test topshirganligini tekshirish
             function hasStudentCompleted(studentId) {
                 return localStorage.getItem(TEST_COMPLETED_KEY + studentId) === 'true';
             }
 
+            // Testni yakunlash va natijalarni saqlash
             function completeTest() {
                 if (!currentStudent) return;
 
@@ -1365,6 +981,7 @@
                 const wrong = total - correct;
                 const percent = Math.round((correct / total) * 100);
 
+                // Natijalarni saqlash
                 const results = {
                     studentName: `${currentStudent.firstName} ${currentStudent.lastName}`,
                     ball: ball,
@@ -1378,9 +995,12 @@
                 
                 localStorage.setItem(TEST_COMPLETED_KEY + studentId, 'true');
                 localStorage.setItem('exam_results_' + studentId, JSON.stringify(results));
+
+                // Natijalarni ko'rsatish
                 showResults(results);
             }
 
+            // Natijalarni ko'rsatish
             function showResults(results) {
                 testSection.classList.remove('active');
                 loginSection.style.display = 'none';
@@ -1393,6 +1013,7 @@
                 document.getElementById('resultPercent').textContent = results.percent + '%';
             }
 
+            // Loginni tekshirish
             function handleLogin() {
                 const first = firstName.value.trim();
                 const last = lastName.value.trim();
@@ -1404,11 +1025,13 @@
 
                 const studentId = `${first}_${last}`.toLowerCase().replace(/\s+/g, '_');
 
+                // Deadline tekshirish
                 if (!checkDeadline()) {
                     loginError.textContent = 'Test vaqti tugagan';
                     return;
                 }
 
+                // Talaba avval test topshirganmi?
                 if (hasStudentCompleted(studentId)) {
                     loginError.textContent = 'Siz allaqachon test topshirgansiz!';
                     
@@ -1420,19 +1043,28 @@
                     return;
                 }
 
+                // Yangi talaba
                 currentStudent = saveStudentData(first, last);
+                
+                // FOYDALANUVCHI UCHUN ARALASHTIRILGAN SAVOLLARNI OLISH
                 shuffledQuestions = getUserQuestions(studentId);
                 
+                // Headerda ismni ko'rsatish
                 headerStudentName.textContent = `${first} ${last}`;
                 studentInfo.style.display = 'flex';
                 
+                // Loginni yashirib, testni ko'rsatish
                 loginSection.style.display = 'none';
                 testSection.classList.add('active');
                 
+                // Testni boshlash
                 renderQuestion();
                 updateUI();
+                
+                console.log(`${first} ${last} uchun aralashtirilgan savollar tayyor!`);
             }
 
+            // Test funksiyalari
             function calcBall() {
                 return answerStatus.filter(s => s === 'correct').length * BALL_PER;
             }
@@ -1451,8 +1083,10 @@
 
                 if (currentIndex === total - 1) {
                     nextBtn.textContent = '🏁 Testni yakunlash';
+                    nextBtn.classList.add('finish-btn');
                 } else {
                     nextBtn.textContent = 'Keyingi ▶';
+                    nextBtn.classList.remove('finish-btn');
                 }
             }
 
@@ -1535,36 +1169,6 @@
             nextBtn.addEventListener('click', goNext);
             prevBtn.addEventListener('click', goPrev);
 
-            // Admin eventlari
-            adminLoginBtn.addEventListener('click', () => {
-                adminModal.classList.add('active');
-                adminPassword.value = '';
-                adminLoginError.textContent = '';
-            });
-
-            adminLoginConfirm.addEventListener('click', adminLogin);
-            
-            adminLoginCancel.addEventListener('click', () => {
-                adminModal.classList.remove('active');
-            });
-
-            adminPassword.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    adminLogin();
-                }
-            });
-
-            adminLogoutBtn.addEventListener('click', adminLogout);
-
-            set7DaysBtn.addEventListener('click', () => setDeadline(7));
-            set3DaysBtn.addEventListener('click', () => setDeadline(3));
-            set1DayBtn.addEventListener('click', () => setDeadline(1));
-            addHourBtn.addEventListener('click', addHour);
-            pauseTimerBtn.addEventListener('click', pauseTimer);
-            resumeTimerBtn.addEventListener('click', resumeTimer);
-            stopTimerBtn.addEventListener('click', stopTimer);
-            resetAllBtn.addEventListener('click', resetAll);
-
             [firstName, lastName].forEach(input => {
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') handleLogin();
@@ -1572,18 +1176,15 @@
             });
 
             window.addEventListener('load', function() {
-                checkAdminStatus();
                 checkDeadline();
             });
             
             window.addEventListener('storage', function(e) {
-                if (e.key === DEADLINE_KEY || e.key === DEADLINE_PAUSED_KEY || e.key === ADMIN_KEY) {
+                if (e.key === DEADLINE_KEY) {
                     checkDeadline();
-                    checkAdminStatus();
                 }
             });
 
-            checkAdminStatus();
             checkDeadline();
         })();
     </script>
