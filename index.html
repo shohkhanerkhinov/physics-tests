@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>⚡ Fizika test | 7 kunlik deadline</title>
     <style>
+        /* (CSS avvalgi bilan bir xil) */
         * {
             margin: 0;
             padding: 0;
@@ -21,7 +22,6 @@
             padding: 10px;
         }
 
-        /* Telefon qutisi */
         .phone-frame {
             width: 100%;
             max-width: 400px;
@@ -34,7 +34,6 @@
             overflow: hidden;
         }
 
-        /* Header */
         .header {
             display: flex;
             align-items: center;
@@ -54,7 +53,6 @@
             text-shadow: 0 0 8px #00a6ff;
         }
 
-        /* Deadline tugmasi va timer */
         .deadline-section {
             background: #0b253a;
             border-radius: 30px;
@@ -140,7 +138,6 @@
             margin-top: 8px;
         }
 
-        /* Bloklangan xabar */
         .blocked-message {
             background: #8b2525;
             border-radius: 30px;
@@ -161,7 +158,6 @@
             font-size: 1.1rem;
         }
 
-        /* Login qismi */
         .login-section {
             background: #0d263f;
             border-radius: 30px;
@@ -243,7 +239,6 @@
             text-align: center;
         }
 
-        /* Test qismi */
         .test-section {
             display: none;
         }
@@ -252,12 +247,6 @@
             display: block;
         }
 
-        .test-section.disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        /* Student info */
         .student-info {
             background: #0f2e44;
             padding: 8px 15px;
@@ -277,28 +266,6 @@
             text-overflow: ellipsis;
         }
 
-        .score-box {
-            background: #0f2e44;
-            padding: 6px 15px;
-            border-radius: 30px;
-            border: 1px solid #f0b840;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .score-box span:first-child {
-            color: #ffdb8e;
-            font-size: 0.9rem;
-        }
-
-        .score-box span:last-child {
-            color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        /* Progress */
         .progress {
             background: #0b253a;
             border-radius: 30px;
@@ -330,7 +297,6 @@
             transition: width 0.3s;
         }
 
-        /* Savol kartasi */
         .question-card {
             background: #0d263f;
             border-radius: 30px;
@@ -362,7 +328,6 @@
             padding-left: 12px;
         }
 
-        /* Variantlar */
         .options {
             display: flex;
             flex-direction: column;
@@ -385,11 +350,6 @@
         .option:active {
             transform: translateY(3px);
             box-shadow: 0 2px 0 #0b1f32;
-        }
-
-        .option.disabled {
-            pointer-events: none;
-            opacity: 0.5;
         }
 
         .option-prefix {
@@ -436,7 +396,6 @@
             border-color: #ffbaba;
         }
 
-        /* Navigatsiya */
         .nav-buttons {
             display: flex;
             gap: 8px;
@@ -475,12 +434,6 @@
             border-color: #3effa3;
         }
 
-        .finish-btn {
-            background: #b3660e;
-            border-color: #ffaa33;
-        }
-
-        /* Natijalar oynasi */
         .results-section {
             display: none;
             background: #0d263f;
@@ -695,8 +648,8 @@
 
     <script>
         (function() {
-            // 25 ta test savollari
-            const questions = [
+            // 25 ta test savollari (ASL SAVOLLAR)
+            const originalQuestions = [
                 { // 1
                     question: "Elektr toki nima?",
                     options: ["A) Elektr maydon", "B) Elektronlarning tartibli harakati", "C) Magnit oqim", "D) Yorug‘lik nuri"],
@@ -826,7 +779,7 @@
 
             // Konstantalar
             const BALL_PER = 2;
-            const total = questions.length;
+            const total = originalQuestions.length;
             const DEADLINE_KEY = 'exam_deadline_start';
             const STUDENT_KEY = 'exam_student_data';
             const TEST_COMPLETED_KEY = 'exam_completed_';
@@ -858,6 +811,59 @@
             let answerStatus = new Array(total).fill(null);
             let timerInterval = null;
             let currentStudent = null;
+            
+            // HAR BIR FOYDALANUVCHI UCHUN ARALASHTIRILGAN SAVOLLAR
+            let shuffledQuestions = [];
+
+            // SAVOLLARNI ARALASHTIRISH FUNKSIYASI
+            function shuffleQuestionsForUser() {
+                // Har bir savol uchun variantlarni aralashtirish
+                return originalQuestions.map(q => {
+                    // Asl variantlarni va to'g'ri javob indeksini olish
+                    const originalOptions = [...q.options];
+                    const correctIndex = q.correct;
+                    const correctText = originalOptions[correctIndex];
+                    
+                    // Variantlarni aralashtirish uchun indekslar bilan obyekt yaratish
+                    const optionObjects = originalOptions.map((text, idx) => ({
+                        text: text,
+                        isCorrect: idx === correctIndex
+                    }));
+                    
+                    // Fisher-Yates aralashtirish algoritmi
+                    for (let i = optionObjects.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [optionObjects[i], optionObjects[j]] = [optionObjects[j], optionObjects[i]];
+                    }
+                    
+                    // Yangi variantlar va to'g'ri javob indeksini topish
+                    const newOptions = optionObjects.map(obj => obj.text);
+                    const newCorrectIndex = optionObjects.findIndex(obj => obj.isCorrect);
+                    
+                    return {
+                        question: q.question,
+                        options: newOptions,
+                        correct: newCorrectIndex
+                    };
+                });
+            }
+
+            // FOYDALANUVCHI UCHUN SAVOLLARNI SAQLASH
+            function getUserQuestions(studentId) {
+                const storageKey = `shuffled_questions_${studentId}`;
+                let questions = localStorage.getItem(storageKey);
+                
+                if (questions) {
+                    // Agar foydalanuvchi uchun avval aralashtirilgan savollar bo'lsa
+                    return JSON.parse(questions);
+                } else {
+                    // Yangi foydalanuvchi uchun savollarni aralashtirish
+                    const newShuffledQuestions = shuffleQuestionsForUser();
+                    localStorage.setItem(storageKey, JSON.stringify(newShuffledQuestions));
+                    console.log(`Yangi foydalanuvchi uchun savollar aralashtirildi: ${studentId}`);
+                    return newShuffledQuestions;
+                }
+            }
 
             // Deadline holatini tekshirish
             function checkDeadline() {
@@ -865,6 +871,7 @@
                 
                 if (!startTime) {
                     startBtn.disabled = false;
+                    startBtn.style.display = 'block';
                     timerBox.style.display = 'none';
                     blockedMessage.style.display = 'none';
                     return false;
@@ -875,6 +882,8 @@
                 const timeLeft = endTime - now;
 
                 if (timeLeft <= 0) {
+                    startBtn.disabled = true;
+                    startBtn.style.display = 'none';
                     timerBox.style.display = 'block';
                     timerDisplay.textContent = '0k 00:00:00';
                     timerDisplay.classList.add('expired');
@@ -884,16 +893,16 @@
                     testSection.classList.remove('active');
                     resultsSection.classList.remove('active');
                     studentInfo.style.display = 'none';
-                    startBtn.disabled = true;
                     
                     if (timerInterval) clearInterval(timerInterval);
                     return false;
                 } else {
+                    startBtn.disabled = true;
+                    startBtn.style.display = 'none';
                     timerBox.style.display = 'block';
                     timerDisplay.classList.remove('expired');
                     timerNote.textContent = 'Hamma uchun umumiy vaqt';
                     blockedMessage.style.display = 'none';
-                    startBtn.disabled = true;
                     
                     startTimer(endTime);
                     return true;
@@ -934,6 +943,12 @@
             function startDeadline() {
                 const now = Date.now();
                 localStorage.setItem(DEADLINE_KEY, now.toString());
+                console.log('Deadline boshlandi:', new Date(now).toLocaleString());
+                
+                startBtn.disabled = true;
+                startBtn.style.display = 'none';
+                timerBox.style.display = 'block';
+                
                 checkDeadline();
             }
 
@@ -1020,7 +1035,6 @@
                 if (hasStudentCompleted(studentId)) {
                     loginError.textContent = 'Siz allaqachon test topshirgansiz!';
                     
-                    // Avvalgi natijalarni ko'rsatish
                     const savedResults = localStorage.getItem('exam_results_' + studentId);
                     if (savedResults) {
                         loginSection.style.display = 'none';
@@ -1031,6 +1045,9 @@
 
                 // Yangi talaba
                 currentStudent = saveStudentData(first, last);
+                
+                // FOYDALANUVCHI UCHUN ARALASHTIRILGAN SAVOLLARNI OLISH
+                shuffledQuestions = getUserQuestions(studentId);
                 
                 // Headerda ismni ko'rsatish
                 headerStudentName.textContent = `${first} ${last}`;
@@ -1043,6 +1060,8 @@
                 // Testni boshlash
                 renderQuestion();
                 updateUI();
+                
+                console.log(`${first} ${last} uchun aralashtirilgan savollar tayyor!`);
             }
 
             // Test funksiyalari
@@ -1062,7 +1081,6 @@
                 const progress = ((currentIndex + 1) / total) * 100;
                 document.getElementById('progressFill').style.width = progress + '%';
 
-                // Oxirgi savol bo'lsa, "Keyingi" tugmasi matnini "Yakunlash" ga o'zgartirish
                 if (currentIndex === total - 1) {
                     nextBtn.textContent = '🏁 Testni yakunlash';
                     nextBtn.classList.add('finish-btn');
@@ -1075,7 +1093,7 @@
             function selectOption(idx) {
                 if (userAnswers[currentIndex] !== null) return;
 
-                const q = questions[currentIndex];
+                const q = shuffledQuestions[currentIndex];
                 const isCorrect = (idx === q.correct);
                 userAnswers[currentIndex] = idx;
                 answerStatus[currentIndex] = isCorrect ? 'correct' : 'wrong';
@@ -1085,7 +1103,7 @@
             }
 
             function renderQuestion() {
-                const q = questions[currentIndex];
+                const q = shuffledQuestions[currentIndex];
                 document.getElementById('questionBadge').innerText = `${currentIndex + 1}-savol`;
                 document.getElementById('questionText').innerText = q.question;
 
@@ -1120,16 +1138,13 @@
             }
 
             function goNext() {
-                // Oxirgi savol bo'lsa, testni yakunlash
                 if (currentIndex === total - 1) {
-                    // Agar oxirgi savolga javob berilmagan bo'lsa
                     if (userAnswers[currentIndex] === null) {
                         alert('Iltimos, avval bu savolga javob bering!');
                         return;
                     }
                     completeTest();
                 } else {
-                    // Keyingi savolga o'tish
                     if (userAnswers[currentIndex] === null) {
                         alert('Iltimos, avval bu savolga javob bering!');
                         return;
@@ -1154,22 +1169,23 @@
             nextBtn.addEventListener('click', goNext);
             prevBtn.addEventListener('click', goPrev);
 
-            // Enter bilan kirish
             [firstName, lastName].forEach(input => {
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') handleLogin();
                 });
             });
 
-            // Sahifa yuklanganda deadline tekshirish
-            checkDeadline();
+            window.addEventListener('load', function() {
+                checkDeadline();
+            });
             
-            // LocalStorage o'zgarishini kuzatish
             window.addEventListener('storage', function(e) {
                 if (e.key === DEADLINE_KEY) {
                     checkDeadline();
                 }
             });
+
+            checkDeadline();
         })();
     </script>
 </body>
