@@ -2,10 +2,9 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>⚡ Fizika test | 7 kunlik deadline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Fizika test | Yarimo'tkazgichlar</title>
     <style>
-        /* (CSS avvalgi bilan bir xil) */
         * {
             margin: 0;
             padding: 0;
@@ -53,13 +52,183 @@
             text-shadow: 0 0 8px #00a6ff;
         }
 
+        .admin-login-btn {
+            background: #2a4055;
+            color: #ffaa33;
+            border: 2px solid #ffaa33;
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .admin-login-btn:active {
+            transform: scale(0.95);
+        }
+
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .admin-modal.active {
+            display: flex;
+        }
+
+        .admin-modal-content {
+            background: #0d263f;
+            border-radius: 40px;
+            padding: 30px 25px;
+            border: 3px solid #ffaa33;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .admin-modal h2 {
+            color: #ffaa33;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .admin-modal input {
+            width: 100%;
+            padding: 18px;
+            background: #112f47;
+            border: 2px solid #2d7fc1;
+            border-radius: 40px;
+            font-size: 1rem;
+            color: white;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .admin-modal input:focus {
+            border-color: #ffaa33;
+        }
+
+        .admin-modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-modal-btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .admin-modal-btn.login {
+            background: #ffaa33;
+            color: #0a1a2b;
+        }
+
+        .admin-modal-btn.cancel {
+            background: #8b2525;
+            color: white;
+        }
+
+        .admin-error {
+            color: #ff7b7b;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .admin-section {
+            display: none;
+            background: #1a2f45;
+            border-radius: 30px;
+            padding: 15px;
+            margin-bottom: 16px;
+            border: 3px solid #ff4444;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #ff8888;
+            font-weight: 600;
+        }
+
+        .admin-badge {
+            background: #ff4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        .admin-logout {
+            background: #8b2525;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+
+        .admin-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-btn {
+            flex: 1;
+            min-width: 100px;
+            background: #2a4055;
+            border: none;
+            border-radius: 40px;
+            padding: 12px 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            border: 2px solid #ff8888;
+            box-shadow: 0 4px 0 #8b0000;
+            cursor: pointer;
+        }
+
+        .admin-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #8b0000;
+        }
+
+        .admin-btn.danger {
+            background: #8b0000;
+            border-color: #ffaaaa;
+        }
+
+        .admin-btn.success {
+            background: #0e6a3c;
+            border-color: #3effa3;
+        }
+
         .deadline-section {
             background: #0b253a;
             border-radius: 30px;
             padding: 15px;
             margin-bottom: 16px;
             border: 2px solid #ffaa33;
-            position: relative;
         }
 
         .deadline-header {
@@ -73,9 +242,6 @@
             color: #ffb347;
             font-weight: 600;
             font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .start-deadline-btn {
@@ -89,7 +255,6 @@
             border: 2px solid #ffd966;
             box-shadow: 0 5px 0 #b36b00;
             cursor: pointer;
-            transition: 0.1s;
         }
 
         .start-deadline-btn:active {
@@ -124,7 +289,6 @@
             color: #ffd966;
             text-shadow: 0 0 20px #ff9900;
             font-family: monospace;
-            letter-spacing: 3px;
         }
 
         .timer-value.expired {
@@ -153,11 +317,6 @@
             margin-bottom: 10px;
         }
 
-        .blocked-message p {
-            color: #ffbaba;
-            font-size: 1.1rem;
-        }
-
         .login-section {
             background: #0d263f;
             border-radius: 30px;
@@ -182,7 +341,6 @@
             display: block;
             color: #b3d9ff;
             margin-bottom: 8px;
-            font-size: 0.95rem;
         }
 
         .input-group input {
@@ -200,10 +358,6 @@
             border-color: #ffaa33;
         }
 
-        .input-group input::placeholder {
-            color: #5f8db0;
-        }
-
         .login-btn {
             width: 100%;
             background: #0e6a3c;
@@ -216,20 +370,12 @@
             border: 2px solid #3effa3;
             box-shadow: 0 6px 0 #064e2b;
             cursor: pointer;
-            transition: 0.1s;
             margin-top: 10px;
         }
 
         .login-btn:active {
             transform: translateY(4px);
             box-shadow: 0 2px 0 #064e2b;
-        }
-
-        .login-btn:disabled {
-            opacity: 0.5;
-            transform: none;
-            box-shadow: 0 4px 0 #064e2b;
-            pointer-events: none;
         }
 
         .error-message {
@@ -255,15 +401,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9rem;
             color: #ffdb8e;
-        }
-
-        .student-name-header {
-            max-width: 150px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .progress {
@@ -276,7 +414,6 @@
         .progress-row {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
             color: #b3d9ff;
             margin-bottom: 5px;
         }
@@ -311,8 +448,6 @@
             display: inline-block;
             padding: 6px 20px;
             border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
             color: white;
             border: 1px solid #79c2ff;
             margin-bottom: 15px;
@@ -320,10 +455,8 @@
 
         .q-text {
             font-size: 1.25rem;
-            font-weight: 500;
             color: #f0f9ff;
             margin-bottom: 25px;
-            line-height: 1.5;
             border-left: 4px solid #ffaa33;
             padding-left: 12px;
         }
@@ -343,7 +476,6 @@
             align-items: center;
             gap: 15px;
             cursor: pointer;
-            transition: 0.15s;
             box-shadow: 0 5px 0 #0b1f32;
         }
 
@@ -361,7 +493,6 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            font-weight: 700;
             color: white;
             border: 2px solid #9aceff;
             flex-shrink: 0;
@@ -370,30 +501,16 @@
         .option-text {
             font-size: 1.1rem;
             color: #e7f3ff;
-            font-weight: 500;
-            line-height: 1.3;
         }
 
         .option.correct {
             background: #0e6a3c;
             border-color: #3effa3;
-            box-shadow: 0 5px 0 #064e2b;
         }
 
         .option.wrong {
             background: #8b2525;
             border-color: #ff7b7b;
-            box-shadow: 0 5px 0 #5e1919;
-        }
-
-        .option.correct .option-prefix {
-            background: #1e8f5e;
-            border-color: #b5ffd6;
-        }
-
-        .option.wrong .option-prefix {
-            background: #a13e3e;
-            border-color: #ffbaba;
         }
 
         .nav-buttons {
@@ -409,12 +526,10 @@
             border-radius: 40px;
             padding: 16px 0;
             font-size: 1.1rem;
-            font-weight: 600;
             color: white;
             border: 2px solid #3894d6;
             box-shadow: 0 6px 0 #0a263a;
             cursor: pointer;
-            transition: 0.1s;
         }
 
         .nav-btn:active {
@@ -425,7 +540,6 @@
         .nav-btn:disabled {
             opacity: 0.4;
             transform: none;
-            box-shadow: 0 4px 0 #0a263a;
             pointer-events: none;
         }
 
@@ -459,11 +573,6 @@
             margin-bottom: 10px;
         }
 
-        .results-header p {
-            color: #b3d9ff;
-            font-size: 1.1rem;
-        }
-
         .result-card {
             background: #112f47;
             border-radius: 30px;
@@ -475,7 +584,6 @@
         .result-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 15px 0;
             border-bottom: 2px dashed #2f6b99;
         }
@@ -486,7 +594,6 @@
 
         .result-label {
             color: #b3d9ff;
-            font-size: 1.1rem;
         }
 
         .result-value {
@@ -498,7 +605,6 @@
         .student-name-result {
             color: white;
             font-size: 1.5rem;
-            font-weight: 600;
             text-align: center;
             margin-bottom: 15px;
         }
@@ -509,13 +615,7 @@
             padding: 15px;
             text-align: center;
             color: #8bb9ff;
-            font-size: 0.95rem;
             border: 2px dashed #ffaa33;
-        }
-
-        .screenshot-note span {
-            color: #ffd966;
-            font-weight: 600;
         }
 
         .footer {
@@ -530,35 +630,69 @@
 </head>
 <body>
     <div class="phone-frame">
-        <!-- Header -->
         <div class="header">
             <div class="title">
-                <h1>⚡Fizika test</h1>
+                <h1>⚡Yarimo'tkazgichlar</h1>
             </div>
-            <div class="student-info" id="studentInfo" style="display: none;">
-                <span>👤</span>
-                <span class="student-name-header" id="headerStudentName"></span>
+            <div style="display: flex; gap: 8px;">
+                <div class="student-info" id="studentInfo" style="display: none;">
+                    <span id="headerStudentName"></span>
+                </div>
+                <div class="admin-login-btn" id="adminLoginBtn">🔑 Admin</div>
+            </div>
+        </div>
+
+        <!-- Admin login modal -->
+        <div class="admin-modal" id="adminModal">
+            <div class="admin-modal-content">
+                <h2>🔐 Admin panel</h2>
+                <input type="password" id="adminPassword" placeholder="Parol" autocomplete="off">
+                <div class="admin-modal-buttons">
+                    <button class="admin-modal-btn login" id="adminLoginConfirm">Kirish</button>
+                    <button class="admin-modal-btn cancel" id="adminLoginCancel">Bekor</button>
+                </div>
+                <div class="admin-error" id="adminLoginError"></div>
+            </div>
+        </div>
+
+        <!-- ADMIN PANELI -->
+        <div class="admin-section" id="adminSection">
+            <div class="admin-header">
+                <span>
+                    <span>🔧 ADMIN PANELI</span>
+                    <span class="admin-badge">FAOL</span>
+                </span>
+                <button class="admin-logout" id="adminLogoutBtn">Chiqish</button>
+            </div>
+            
+            <div class="admin-buttons">
+                <button class="admin-btn success" id="set1HourBtn">⏱️ 1 soat</button>
+                <button class="admin-btn" id="set2HourBtn">⏱️ 2 soat</button>
+                <button class="admin-btn" id="set3HourBtn">⏱️ 3 soat</button>
+                <button class="admin-btn" id="add10MinBtn">➕ 10 min</button>
+                <button class="admin-btn" id="pauseTimerBtn">⏸️ Pauza</button>
+                <button class="admin-btn" id="resumeTimerBtn">▶️ Davom</button>
+                <button class="admin-btn danger" id="stopTimerBtn">⛔ To'xtat</button>
             </div>
         </div>
 
         <!-- Deadline qismi -->
         <div class="deadline-section" id="deadlineSection">
             <div class="deadline-header">
-                <span class="deadline-title">⏰ 7 kunlik deadline</span>
-                <button class="start-deadline-btn" id="startDeadlineBtn">▶ START DEADLINE</button>
+                <span class="deadline-title">⏰ Test vaqti</span>
+                <button class="start-deadline-btn" id="startDeadlineBtn">▶ START</button>
             </div>
             <div class="timer-box" id="timerBox" style="display: none;">
                 <div class="timer-label">Qolgan vaqt:</div>
-                <div class="timer-value" id="timerDisplay">7 kun</div>
-                <div class="timer-note" id="timerNote">Hamma uchun umumiy vaqt</div>
+                <div class="timer-value" id="timerDisplay">00:00:00</div>
+                <div class="timer-note" id="timerNote"></div>
             </div>
         </div>
 
         <!-- Bloklangan xabar -->
         <div class="blocked-message" id="blockedMessage" style="display: none;">
             <h2>⛔ TEST BLOKLANGAN</h2>
-            <p>7 kunlik muddat tugadi</p>
-            <p style="font-size: 0.9rem; margin-top: 15px;">Admin bilan bog'lanishingiz mumkin</p>
+            <p>Vaqt tugadi</p>
         </div>
 
         <!-- Login qismi -->
@@ -578,25 +712,21 @@
 
         <!-- Test qismi -->
         <div class="test-section" id="testSection">
-            <!-- Progress bar -->
             <div class="progress">
                 <div class="progress-row">
-                    <span>🔋 <span id="currentAmp">0.0</span> A</span>
-                    <span id="questionCounter">1/25</span>
+                    <span id="questionCounter">1/20</span>
                 </div>
                 <div class="bar-bg">
-                    <div class="bar-fill" id="progressFill" style="width: 4%;"></div>
+                    <div class="bar-fill" id="progressFill" style="width: 5%;"></div>
                 </div>
             </div>
 
-            <!-- Savol -->
             <div class="question-card">
                 <div class="q-badge" id="questionBadge">1-savol</div>
                 <div class="q-text" id="questionText">Yuklanmoqda...</div>
                 <div class="options" id="optionsContainer"></div>
             </div>
 
-            <!-- Tugmalar -->
             <div class="nav-buttons">
                 <button class="nav-btn" id="prevBtn" disabled>◀ Oldingi</button>
                 <button class="nav-btn next-btn" id="nextBtn">Keyingi ▶</button>
@@ -611,21 +741,16 @@
             </div>
             
             <div class="result-card">
-                <div class="student-name-result" id="resultFullName">Abror Abdullayev</div>
+                <div class="student-name-result" id="resultFullName"></div>
                 
                 <div class="result-row">
                     <span class="result-label">To'plangan ball:</span>
-                    <span class="result-value" id="resultBall">0 / 50</span>
+                    <span class="result-value" id="resultBall">0 / 40</span>
                 </div>
                 
                 <div class="result-row">
                     <span class="result-label">To'g'ri javoblar:</span>
-                    <span class="result-value" id="resultCorrect">0 / 25</span>
-                </div>
-                
-                <div class="result-row">
-                    <span class="result-label">Noto'g'ri javoblar:</span>
-                    <span class="result-value" id="resultWrong">0</span>
+                    <span class="result-value" id="resultCorrect">0 / 20</span>
                 </div>
                 
                 <div class="result-row">
@@ -635,558 +760,616 @@
             </div>
             
             <div class="screenshot-note">
-                <span>📸 Skrinshot oling</span><br>
-                va ustozingizga yuboring
+                <span>📸 Skrinshot oling va ustozingizga yuboring</span>
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
-            I = U/R  |  P = I²R
+            Yarimo'tkazgichlar | p-n o'tish | 2 ball
         </div>
     </div>
 
     <script>
-        (function() {
-            // 25 ta test savollari (ASL SAVOLLAR)
-            const originalQuestions = [
-                { // 1
-                    question: "Elektr toki nima?",
-                    options: ["A) Elektr maydon", "B) Elektronlarning tartibli harakati", "C) Magnit oqim", "D) Yorug‘lik nuri"],
-                    correct: 1
-                },
-                { // 2
-                    question: "Tok kuchining birligi:",
-                    options: ["A) Volt", "B) Om", "C) Amper", "D) Vatt"],
-                    correct: 2
-                },
-                { // 3
-                    question: "DC tokning xususiyati:",
-                    options: ["A) Yo‘nalishi o‘zgaradi", "B) Yo‘nalishi o‘zgarmaydi", "C) Magnit maydon hosil qilmaydi", "D) Kuchlanish nol"],
-                    correct: 1
-                },
-                { // 4
-                    question: "Uy rozetkasidagi tok turi:",
-                    options: ["A) DC", "B) AC", "C) Impulsli", "D) Statik"],
-                    correct: 1
-                },
-                { // 5
-                    question: "Telefon batareyasi qanday tok beradi?",
-                    options: ["A) AC", "B) DC", "C) 220V", "D) 50Hz"],
-                    correct: 1
-                },
-                { // 6
-                    question: "Om qonuni formulasi:",
-                    options: ["A) P = UI", "B) I = U/R", "C) R = UI", "D) U = IR²"],
-                    correct: 1
-                },
-                { // 7
-                    question: "Qarshilik birligi:",
-                    options: ["A) Volt", "B) Vatt", "C) Om", "D) Amper"],
-                    correct: 2
-                },
-                { // 8
-                    question: "Agar kuchlanish oshsa (R o‘zgarmasa), tok:",
-                    options: ["A) Kamayadi", "B) O‘zgarmaydi", "C) Oshadi", "D) Nol bo‘ladi"],
-                    correct: 2
-                },
-                { // 9
-                    question: "Quvvat formulasi:",
-                    options: ["A) P = IR", "B) P = UI", "C) P = U/R", "D) P = I/R"],
-                    correct: 1
-                },
-                { // 10
-                    question: "5V va 2A telefon quvvati:",
-                    options: ["A) 7W", "B) 10W", "C) 15W", "D) 2W"],
-                    correct: 1
-                },
-                { // 11
-                    question: "Agar kabel qarshiligi katta bo‘lsa:",
-                    options: ["A) Tok oshadi", "B) Tok kamayadi", "C) Kabel soviydi", "D) Volt oshadi"],
-                    correct: 1
-                },
-                { // 12
-                    question: "Kabel qizishi qaysi formulaga bog‘liq?",
-                    options: ["A) P = UI", "B) P = I²R", "C) P = U/R", "D) P = IR"],
-                    correct: 1
-                },
-                { // 13
-                    question: "Qisqa tutashuv nima?",
-                    options: ["A) Kuchlanish oshishi", "B) Qarshilik nolga yaqinlashishi", "C) Tok kamayishi", "D) Quvvat nol"],
-                    correct: 1
-                },
-                { // 14
-                    question: "Nima uchun energiya yuqori volt bilan uzatiladi?",
-                    options: ["A) Tokni oshirish uchun", "B) Tokni kamaytirish uchun", "C) Qarshilikni oshirish uchun", "D) Magnitni kamaytirish uchun"],
-                    correct: 1
-                },
-                { // 15
-                    question: "220V rozetka to‘g‘ridan-to‘g‘ri telefonni nima qiladi?",
-                    options: ["A) Zaryadlaydi", "B) Sekin ishlaydi", "C) Kuydiradi", "D) Sovutadi"],
-                    correct: 2
-                },
-                { // 16
-                    question: "Server oddiy kompyuterdan ko‘proq tok tortish sababi:",
-                    options: ["A) Dizayni boshqacha", "B) Katta yuklama va ko‘p komponent", "C) Rangi qora", "D) Internet tezligi"],
-                    correct: 1
-                },
-                { // 17
-                    question: "AC tokning afzalligi:",
-                    options: ["A) Uzoqqa uzatish qulay", "B) Faqat batareyada ishlaydi", "C) Qarshiliksiz", "D) Doimiy"],
-                    correct: 0
-                },
-                { // 18
-                    question: "220V va 5A qurilma quvvati:",
-                    options: ["A) 225W", "B) 1100W", "C) 500W", "D) 100W"],
-                    correct: 1
-                },
-                { // 19
-                    question: "DC tok qayerda ishlatiladi?",
-                    options: ["A) Elektr stansiya uzatishda", "B) Telefon va kompyuter ichida", "C) Uzoq masofada", "D) Transformator ichida"],
-                    correct: 1
-                },
-                { // 20
-                    question: "Elektr energiya yo‘qotilishi asosan qayerda yuz beradi?",
-                    options: ["A) Kuchlanishda", "B) Qarshilikda", "C) Amperda", "D) Magnitda"],
-                    correct: 1
-                },
-                { // 21
-                    question: "Agar R = 20 Ω va U = 220 V bo‘lsa, tok kuchi nechaga teng?",
-                    options: ["A) 5 A", "B) 10 A", "C) 11 A", "D) 4 A"],
-                    correct: 2
-                },
-                { // 22
-                    question: "5 Ω qarshilikdan 4 A tok o‘tsa, kuchlanish qancha?",
-                    options: ["A) 10 V", "B) 20 V", "C) 15 V", "D) 25 V"],
-                    correct: 1
-                },
-                { // 23
-                    question: "220 V tarmoqqa ulangan 1100 W qurilma nechta amper tok tortadi?",
-                    options: ["A) 2 A", "B) 3 A", "C) 5 A", "D) 10 A"],
-                    correct: 2
-                },
-                { // 24
-                    question: "Qarshilik ikki marta oshsa (U o‘zgarmasa), tok:",
-                    options: ["A) Ikki marta oshadi", "B) O‘zgarmaydi", "C) Ikki marta kamayadi", "D) Nol bo‘ladi"],
-                    correct: 2
-                },
-                { // 25
-                    question: "10 A tok o‘tayotgan kabelda R = 2 Ω bo‘lsa, issiqlik quvvati qancha?",
-                    options: ["A) 20 W", "B) 100 W", "C) 200 W", "D) 50 W"],
-                    correct: 2
+        // ==================== TEST SAVOLLARI (20 ta) ====================
+        const questions = [
+            {
+                question: "Elektr toki deb nimaga aytiladi?",
+                options: [
+                    "A) Elektronlarning tartibli harakati",
+                    "B) Protonlarning harakati", 
+                    "C) Elektronlarning tasodifiy harakati",
+                    "D) protonlarning boshqarilmas harakati"
+                ],
+                correct: 0
+            },
+            {
+                question: "Metallarda elektr tokini kimlar tashiydi?",
+                options: [
+                    "A) Erkin elektronlar",
+                    "B) musbat va manfiy ionlar",
+                    "C) teng miqdorda kovaklar va elektronlar",
+                    "D) asosan kovaklar"
+                ],
+                correct: 0
+            },
+            {
+                question: "Ohm qonuni qanday ifodalanadi?",
+                options: [
+                    "A) I = R × U",
+                    "B) I = U / R",
+                    "C) I = U × R",
+                    "D) I = U + R"
+                ],
+                correct: 1
+            },
+            {
+                question: "Metallarda qarshilik qanday o‘zgaradi, agar metallning uzunligi ortsa?",
+                options: [
+                    "A) Qarshilik kamayadi",
+                    "B) Qarshilik o‘zgarmaydi",
+                    "C) Qarshilik ortadi",
+                    "D) Hech qanday o‘zgarish bo‘lmaydi"
+                ],
+                correct: 2
+            },
+            {
+                question: "Yarimo‘tkazgichlarda elektr toki nima tomonidan tashiladi?",
+                options: [
+                    "A) Elektronlar",
+                    "B) Protonlar",
+                    "C) electron va kovaklar",
+                    "D) musbat va manfiy ionlar"
+                ],
+                correct: 2
+            },
+            {
+                question: "4-guruh elementlariga 5-guruh elementlari qo‘shilsa, qanday o'tkazuvchanlik hosil bo‘ladi?",
+                options: [
+                    "A) Donor o'tkazuvchanligi",
+                    "B) Akseptor o'tkazuvchanligi",
+                    "C) n-turi o'tkazuvchanlik",
+                    "D) A va C javob to'g'ri"
+                ],
+                correct: 3
+            },
+            {
+                question: "4-guruh elementlariga 3-guruh elementlari qo‘shilsa, qanday o'tkazuvchanlik hosil bo‘ladi?",
+                options: [
+                    "A) Donor o'tkazuvchanligi",
+                    "B) Akseptor o'tkazuvchanligi",
+                    "C) p-turi o'tkazuvchanlik",
+                    "D) B va C javob to'g'ri"
+                ],
+                correct: 3
+            },
+            {
+                question: "Toza yarimo‘tkazgichda elektr toki kim tomonidan tashiladi?",
+                options: [
+                    "A) Elektronlar",
+                    "B) teng miqdorda musbat va manfiy ionlar",
+                    "C) teng miqdorda elektronlar va kovaklar",
+                    "D) protonlar va elektronlar"
+                ],
+                correct: 2
+            },
+            {
+                question: "Donor aralashma nima?",
+                options: [
+                    "A) 4 va 5 guruh elementlarini qo'shilishidan hosil bo'lgan aralashma",
+                    "B) erkin elektroni ko'p bo'lgan aralashma",
+                    "C) Yarimo'tkazgichni n-turi o'tkazuvchanligiga olib keladigan aralashma",
+                    "D) barcha javob to'g'ri"
+                ],
+                correct: 3
+            },
+            {
+                question: "Akseptor aralashma nima?",
+                options: [
+                    "A) 4 va 5 guruh elementlarini qo'shilishidan hosil bo'lgan aralashma",
+                    "B) erkin elektroni ko'p bo'lgan aralashma",
+                    "C) Yarimo'tkazgichni p-turi o'tkazuvchanligiga olib keladigan aralashma",
+                    "D) barcha javob to'g'ri"
+                ],
+                correct: 2
+            },
+            {
+                question: "Dielektrik nima?",
+                options: [
+                    "A) Elektr toki o‘tkazmaydigan material",
+                    "B) Elektr toki yaxshi o‘tkazadigan material",
+                    "C) Elektr toki o‘tkazuvchi suyuqlik",
+                    "D) Elektr toki o‘tkazmaydigan gaz"
+                ],
+                correct: 0
+            },
+            {
+                question: "Suyuqliklarda elektr toki kim tomonidan tashiladi?",
+                options: [
+                    "A) Elektronlar",
+                    "B) musbat zaryadlangan ionlar",
+                    "C) manfiy zaryadlangan ionlar",
+                    "D) musbat va manfiy ionlar"
+                ],
+                correct: 3
+            },
+            {
+                question: "Musbat ion nima?",
+                options: [
+                    "A) Elektronlarni beruvchi zaryadlangan zarracha",
+                    "B) Elektronlarni qabul qiluvchi zaryadlangan zarracha",
+                    "C) Neutrallangan zarracha",
+                    "D) protoni elektroniga nisbatan kop bolgan atom"
+                ],
+                correct: 3
+            },
+            {
+                question: "Vakuumda elektr toki qanday hosil bo‘ladi?",
+                options: [
+                    "A) Elektronlarning vakuum orqali harakati",
+                    "B) musbat zaryadli ionlarning harakati",
+                    "C) umumiy tokning o‘zgarishi",
+                    "D) Elektron va fotonlar to‘qnashuvi"
+                ],
+                correct: 0
+            },
+            {
+                question: "Rentgen apparatida elektr toki qaysi muhit asosida hosil qilinadi?",
+                options: [
+                    "A) Vakuum",
+                    "B) Suyuqlik",
+                    "C) G'ovakli materiallar",
+                    "D) Yassi plitalar"
+                ],
+                correct: 0
+            },
+            {
+                question: "Uzunligi 50 m bo‘lgan mis simning ko‘ndalang kesim yuzi 2 mm². Agar unga 12 V kuchlanish berilsa, zanjirdan o‘tadigan tokni toping. (ρ = 1.7 × 10⁻⁸ Ω·m)",
+                options: [
+                    "A) 28 A",
+                    "B) 14 A",
+                    "C) 56 A",
+                    "D) 13 A"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qarshiligi 10 Ω bo‘lgan o‘tkazgichdan 5 A tok 2 minut davomida o‘tsa, ajralib chiqadigan issiqlik miqdorini toping",
+                options: [
+                    "A) 60 kJ",
+                    "B) 30 kJ",
+                    "C) 6 kJ",
+                    "D) 3 kJ"
+                ],
+                correct: 1
+            },
+            {
+                question: "Gaz razryad naychasida 0.02 A tok oqmoqda. Agar har bir ionning zaryadi 1.6 × 10⁻¹⁹ C bo‘lsa, 1 sekundda naychadan nechta zaryad tashuvchi o‘tadi?",
+                options: [
+                    "A) 2.25 × 10¹⁷",
+                    "B) 1.25 × 10¹⁹",
+                    "C) 1.25 × 10¹⁷",
+                    "D) 2.25 × 10¹⁷"
+                ],
+                correct: 2
+            },
+            {
+                question: "Agar yarimo‘tkazgichdan 4 A tok o‘tsa, 10 sekund ichida o‘tgan elektronlar sonini toping. (e = 1.6 × 10⁻¹⁹ C)",
+                options: [
+                    "A) 2.5 × 10¹⁰",
+                    "B) 2.5 × 10¹⁵",
+                    "C) 2.5 × 10²⁰",
+                    "D) 2.5 × 10²⁵"
+                ],
+                correct: 2
+            }
+        ];
+
+        // ==================== KONSTANTALAR ====================
+        const BALL_PER = 2;
+        const totalQuestions = questions.length;
+        const ADMIN_PASSWORD = "admin123";
+        const DEADLINE_KEY = 'exam_deadline_end';
+        const IS_PAUSED_KEY = 'exam_is_paused';
+        const PAUSED_TIME_KEY = 'exam_paused_time';
+
+        // ==================== STATE ====================
+        let currentIndex = 0;
+        let userAnswers = new Array(totalQuestions).fill(null);
+        let answerStatus = new Array(totalQuestions).fill(null);
+        let timerInterval = null;
+        let currentStudent = null;
+        let isAdmin = false;
+        let shuffledQuestions = [];
+
+        // ==================== DOM ELEMENTLAR ====================
+        const startBtn = document.getElementById('startDeadlineBtn');
+        const timerBox = document.getElementById('timerBox');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerNote = document.getElementById('timerNote');
+        const blockedMessage = document.getElementById('blockedMessage');
+        const loginSection = document.getElementById('loginSection');
+        const testSection = document.getElementById('testSection');
+        const resultsSection = document.getElementById('resultsSection');
+        const studentInfo = document.getElementById('studentInfo');
+        const headerStudentName = document.getElementById('headerStudentName');
+        
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginError = document.getElementById('loginError');
+
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const questionBadge = document.getElementById('questionBadge');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const questionCounter = document.getElementById('questionCounter');
+        const progressFill = document.getElementById('progressFill');
+
+        // Admin elementlari
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminModal = document.getElementById('adminModal');
+        const adminPassword = document.getElementById('adminPassword');
+        const adminLoginConfirm = document.getElementById('adminLoginConfirm');
+        const adminLoginCancel = document.getElementById('adminLoginCancel');
+        const adminLoginError = document.getElementById('adminLoginError');
+        const adminSection = document.getElementById('adminSection');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        
+        const set1HourBtn = document.getElementById('set1HourBtn');
+        const set2HourBtn = document.getElementById('set2HourBtn');
+        const set3HourBtn = document.getElementById('set3HourBtn');
+        const add10MinBtn = document.getElementById('add10MinBtn');
+        const pauseTimerBtn = document.getElementById('pauseTimerBtn');
+        const resumeTimerBtn = document.getElementById('resumeTimerBtn');
+        const stopTimerBtn = document.getElementById('stopTimerBtn');
+
+        // ==================== FUNKSIYALAR ====================
+
+        // Savollarni aralashtirish
+        function shuffleQuestions() {
+            return questions.map(q => {
+                const optionObjects = q.options.map((text, idx) => ({
+                    text: text,
+                    isCorrect: idx === q.correct
+                }));
+                
+                for (let i = optionObjects.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [optionObjects[i], optionObjects[j]] = [optionObjects[j], optionObjects[i]];
                 }
-            ];
+                
+                return {
+                    question: q.question,
+                    options: optionObjects.map(obj => obj.text),
+                    correct: optionObjects.findIndex(obj => obj.isCorrect)
+                };
+            });
+        }
 
-            // Konstantalar
-            const BALL_PER = 2;
-            const total = originalQuestions.length;
-            const DEADLINE_KEY = 'exam_deadline_start';
-            const STUDENT_KEY = 'exam_student_data';
-            const TEST_COMPLETED_KEY = 'exam_completed_';
-            const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+        // Vaqtni formatlash (HH:MM:SS)
+        function formatTime(ms) {
+            if (ms < 0) return "00:00:00";
+            const hours = Math.floor(ms / (60 * 60 * 1000));
+            const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((ms % (60 * 1000)) / 1000);
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
 
-            // DOM elementlar
-            const startBtn = document.getElementById('startDeadlineBtn');
-            const timerBox = document.getElementById('timerBox');
-            const timerDisplay = document.getElementById('timerDisplay');
-            const timerNote = document.getElementById('timerNote');
-            const blockedMessage = document.getElementById('blockedMessage');
-            const loginSection = document.getElementById('loginSection');
-            const testSection = document.getElementById('testSection');
-            const resultsSection = document.getElementById('resultsSection');
-            const studentInfo = document.getElementById('studentInfo');
-            const headerStudentName = document.getElementById('headerStudentName');
+        // Deadlineni tekshirish
+        function checkDeadline() {
+            const endTime = localStorage.getItem(DEADLINE_KEY);
             
-            const firstName = document.getElementById('firstName');
-            const lastName = document.getElementById('lastName');
-            const loginBtn = document.getElementById('loginBtn');
-            const loginError = document.getElementById('loginError');
-
-            const nextBtn = document.getElementById('nextBtn');
-            const prevBtn = document.getElementById('prevBtn');
-
-            // Test state
-            let currentIndex = 0;
-            let userAnswers = new Array(total).fill(null);
-            let answerStatus = new Array(total).fill(null);
-            let timerInterval = null;
-            let currentStudent = null;
-            
-            // HAR BIR FOYDALANUVCHI UCHUN ARALASHTIRILGAN SAVOLLAR
-            let shuffledQuestions = [];
-
-            // SAVOLLARNI ARALASHTIRISH FUNKSIYASI
-            function shuffleQuestionsForUser() {
-                // Har bir savol uchun variantlarni aralashtirish
-                return originalQuestions.map(q => {
-                    // Asl variantlarni va to'g'ri javob indeksini olish
-                    const originalOptions = [...q.options];
-                    const correctIndex = q.correct;
-                    const correctText = originalOptions[correctIndex];
-                    
-                    // Variantlarni aralashtirish uchun indekslar bilan obyekt yaratish
-                    const optionObjects = originalOptions.map((text, idx) => ({
-                        text: text,
-                        isCorrect: idx === correctIndex
-                    }));
-                    
-                    // Fisher-Yates aralashtirish algoritmi
-                    for (let i = optionObjects.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [optionObjects[i], optionObjects[j]] = [optionObjects[j], optionObjects[i]];
-                    }
-                    
-                    // Yangi variantlar va to'g'ri javob indeksini topish
-                    const newOptions = optionObjects.map(obj => obj.text);
-                    const newCorrectIndex = optionObjects.findIndex(obj => obj.isCorrect);
-                    
-                    return {
-                        question: q.question,
-                        options: newOptions,
-                        correct: newCorrectIndex
-                    };
-                });
+            if (!endTime) {
+                startBtn.disabled = false;
+                startBtn.style.display = 'block';
+                timerBox.style.display = 'none';
+                blockedMessage.style.display = 'none';
+                return false;
             }
 
-            // FOYDALANUVCHI UCHUN SAVOLLARNI SAQLASH
-            function getUserQuestions(studentId) {
-                const storageKey = `shuffled_questions_${studentId}`;
-                let questions = localStorage.getItem(storageKey);
-                
-                if (questions) {
-                    // Agar foydalanuvchi uchun avval aralashtirilgan savollar bo'lsa
-                    return JSON.parse(questions);
-                } else {
-                    // Yangi foydalanuvchi uchun savollarni aralashtirish
-                    const newShuffledQuestions = shuffleQuestionsForUser();
-                    localStorage.setItem(storageKey, JSON.stringify(newShuffledQuestions));
-                    console.log(`Yangi foydalanuvchi uchun savollar aralashtirildi: ${studentId}`);
-                    return newShuffledQuestions;
-                }
-            }
-
-            // Deadline holatini tekshirish
-            function checkDeadline() {
-                const startTime = localStorage.getItem(DEADLINE_KEY);
-                
-                if (!startTime) {
-                    startBtn.disabled = false;
-                    startBtn.style.display = 'block';
-                    timerBox.style.display = 'none';
-                    blockedMessage.style.display = 'none';
-                    return false;
-                }
-
-                const now = Date.now();
-                const endTime = parseInt(startTime) + SEVEN_DAYS_MS;
-                const timeLeft = endTime - now;
-
-                if (timeLeft <= 0) {
+            const isPaused = localStorage.getItem(IS_PAUSED_KEY) === 'true';
+            
+            if (isPaused) {
+                const pausedTime = localStorage.getItem(PAUSED_TIME_KEY);
+                if (pausedTime) {
                     startBtn.disabled = true;
                     startBtn.style.display = 'none';
                     timerBox.style.display = 'block';
-                    timerDisplay.textContent = '0k 00:00:00';
-                    timerDisplay.classList.add('expired');
-                    timerNote.textContent = 'Muddat tugadi';
-                    blockedMessage.style.display = 'block';
-                    loginSection.style.display = 'none';
-                    testSection.classList.remove('active');
-                    resultsSection.classList.remove('active');
-                    studentInfo.style.display = 'none';
-                    
-                    if (timerInterval) clearInterval(timerInterval);
-                    return false;
-                } else {
-                    startBtn.disabled = true;
-                    startBtn.style.display = 'none';
-                    timerBox.style.display = 'block';
-                    timerDisplay.classList.remove('expired');
-                    timerNote.textContent = 'Hamma uchun umumiy vaqt';
+                    timerDisplay.textContent = formatTime(parseInt(pausedTime));
+                    timerNote.textContent = 'VAQT PAUZADA';
                     blockedMessage.style.display = 'none';
-                    
-                    startTimer(endTime);
                     return true;
                 }
             }
 
-            // Timerni yangilash
-            function startTimer(endTime) {
-                if (timerInterval) clearInterval(timerInterval);
-                
-                timerInterval = setInterval(() => {
-                    const now = Date.now();
-                    const timeLeft = endTime - now;
+            const timeLeft = parseInt(endTime) - Date.now();
 
-                    if (timeLeft <= 0) {
-                        clearInterval(timerInterval);
-                        timerDisplay.textContent = '0k 00:00:00';
-                        timerDisplay.classList.add('expired');
-                        timerNote.textContent = 'Muddat tugadi';
-                        blockedMessage.style.display = 'block';
-                        loginSection.style.display = 'none';
-                        testSection.classList.remove('active');
-                        resultsSection.classList.remove('active');
-                        studentInfo.style.display = 'none';
-                        return;
-                    }
-
-                    const days = Math.floor(timeLeft / (24 * 60 * 60 * 1000));
-                    const hours = Math.floor((timeLeft % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-                    const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
-                    const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
-
-                    timerDisplay.textContent = `${days}k ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                }, 1000);
-            }
-
-            // Deadline boshlash
-            function startDeadline() {
-                const now = Date.now();
-                localStorage.setItem(DEADLINE_KEY, now.toString());
-                console.log('Deadline boshlandi:', new Date(now).toLocaleString());
-                
+            if (timeLeft <= 0) {
                 startBtn.disabled = true;
                 startBtn.style.display = 'none';
                 timerBox.style.display = 'block';
+                timerDisplay.textContent = '00:00:00';
+                timerDisplay.classList.add('expired');
+                timerNote.textContent = 'Vaqt tugadi';
+                blockedMessage.style.display = 'block';
+                loginSection.style.display = 'none';
+                testSection.classList.remove('active');
+                if (timerInterval) clearInterval(timerInterval);
+                return false;
+            } else {
+                startBtn.disabled = true;
+                startBtn.style.display = 'none';
+                timerBox.style.display = 'block';
+                timerDisplay.classList.remove('expired');
+                timerNote.textContent = 'Test vaqti';
+                blockedMessage.style.display = 'none';
                 
+                startTimer(parseInt(endTime));
+                return true;
+            }
+        }
+
+        // Timerni boshlash
+        function startTimer(endTime) {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            timerInterval = setInterval(() => {
+                if (localStorage.getItem(IS_PAUSED_KEY) === 'true') return;
+                
+                const timeLeft = endTime - Date.now();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.textContent = '00:00:00';
+                    timerDisplay.classList.add('expired');
+                    timerNote.textContent = 'Vaqt tugadi';
+                    blockedMessage.style.display = 'block';
+                    loginSection.style.display = 'none';
+                    testSection.classList.remove('active');
+                    return;
+                }
+                
+                timerDisplay.textContent = formatTime(timeLeft);
+            }, 1000);
+        }
+
+        // Deadline boshlash
+        function startDeadline(hours = 1) {
+            const endTime = Date.now() + (hours * 60 * 60 * 1000);
+            localStorage.setItem(DEADLINE_KEY, endTime.toString());
+            localStorage.removeItem(IS_PAUSED_KEY);
+            localStorage.removeItem(PAUSED_TIME_KEY);
+            checkDeadline();
+        }
+
+        // Admin funksiyalari
+        function setDeadline(hours) {
+            if (!isAdmin) return;
+            startDeadline(hours);
+        }
+
+        function addMinutes(minutes) {
+            if (!isAdmin) return;
+            const endTime = localStorage.getItem(DEADLINE_KEY);
+            if (endTime) {
+                const newTime = parseInt(endTime) + (minutes * 60 * 1000);
+                localStorage.setItem(DEADLINE_KEY, newTime.toString());
                 checkDeadline();
             }
+        }
 
-            // Talaba ma'lumotlarini saqlash
-            function saveStudentData(first, last) {
-                const studentId = `${first}_${last}`.toLowerCase().replace(/\s+/g, '_');
-                const studentData = {
-                    firstName: first,
-                    lastName: last,
-                    studentId: studentId,
-                    startTime: Date.now(),
-                    completed: false
-                };
-                localStorage.setItem(STUDENT_KEY, JSON.stringify(studentData));
-                return studentData;
+        function pauseTimer() {
+            if (!isAdmin) return;
+            const endTime = localStorage.getItem(DEADLINE_KEY);
+            if (endTime) {
+                const timeLeft = parseInt(endTime) - Date.now();
+                if (timeLeft > 0) {
+                    localStorage.setItem(IS_PAUSED_KEY, 'true');
+                    localStorage.setItem(PAUSED_TIME_KEY, timeLeft.toString());
+                    if (timerInterval) clearInterval(timerInterval);
+                    timerDisplay.textContent = formatTime(timeLeft);
+                    timerNote.textContent = 'VAQT PAUZADA';
+                }
             }
+        }
 
-            // Talaba test topshirganligini tekshirish
-            function hasStudentCompleted(studentId) {
-                return localStorage.getItem(TEST_COMPLETED_KEY + studentId) === 'true';
+        function resumeTimer() {
+            if (!isAdmin) return;
+            const pausedTime = localStorage.getItem(PAUSED_TIME_KEY);
+            if (pausedTime) {
+                const newEndTime = Date.now() + parseInt(pausedTime);
+                localStorage.setItem(DEADLINE_KEY, newEndTime.toString());
+                localStorage.removeItem(IS_PAUSED_KEY);
+                localStorage.removeItem(PAUSED_TIME_KEY);
+                checkDeadline();
             }
+        }
 
-            // Testni yakunlash va natijalarni saqlash
-            function completeTest() {
-                if (!currentStudent) return;
+        function stopTimer() {
+            if (!isAdmin) return;
+            localStorage.setItem(DEADLINE_KEY, (Date.now() - 1000).toString());
+            localStorage.removeItem(IS_PAUSED_KEY);
+            localStorage.removeItem(PAUSED_TIME_KEY);
+            checkDeadline();
+        }
 
-                const studentId = currentStudent.studentId;
+        // Test funksiyalari
+        function calcBall() {
+            return answerStatus.filter(s => s === 'correct').length * BALL_PER;
+        }
+
+        function updateUI() {
+            const ball = calcBall();
+            const correct = answerStatus.filter(s => s === 'correct').length;
+            
+            questionCounter.textContent = `${currentIndex + 1}/${totalQuestions}`;
+            progressFill.style.width = `${((currentIndex + 1) / totalQuestions) * 100}%`;
+
+            if (currentIndex === totalQuestions - 1) {
+                nextBtn.textContent = '🏁 Testni yakunlash';
+            } else {
+                nextBtn.textContent = 'Keyingi ▶';
+            }
+        }
+
+        function renderQuestion() {
+            const q = shuffledQuestions[currentIndex];
+            questionBadge.textContent = `${currentIndex + 1}-savol`;
+            questionText.textContent = q.question;
+
+            const selected = userAnswers[currentIndex];
+            const status = answerStatus[currentIndex];
+            const letters = ['A', 'B', 'C', 'D'];
+
+            let html = '';
+            q.options.forEach((opt, idx) => {
+                let optClass = 'option';
+                if (selected !== null && idx === selected) {
+                    optClass += status === 'correct' ? ' correct' : ' wrong';
+                }
+                html += `
+                    <div class="${optClass}" data-index="${idx}">
+                        <span class="option-prefix">${letters[idx]}</span>
+                        <span class="option-text">${opt}</span>
+                    </div>
+                `;
+            });
+
+            optionsContainer.innerHTML = html;
+
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    const idx = opt.dataset.index;
+                    if (idx && userAnswers[currentIndex] === null) {
+                        const isCorrect = parseInt(idx) === shuffledQuestions[currentIndex].correct;
+                        userAnswers[currentIndex] = parseInt(idx);
+                        answerStatus[currentIndex] = isCorrect ? 'correct' : 'wrong';
+                        renderQuestion();
+                        updateUI();
+                    }
+                });
+            });
+
+            prevBtn.disabled = currentIndex === 0;
+        }
+
+        function goNext() {
+            if (currentIndex === totalQuestions - 1) {
+                if (userAnswers[currentIndex] === null) {
+                    alert('Iltimos, avval bu savolga javob bering!');
+                    return;
+                }
+                
                 const ball = calcBall();
                 const correct = answerStatus.filter(s => s === 'correct').length;
-                const wrong = total - correct;
-                const percent = Math.round((correct / total) * 100);
-
-                // Natijalarni saqlash
-                const results = {
-                    studentName: `${currentStudent.firstName} ${currentStudent.lastName}`,
-                    ball: ball,
-                    correct: correct,
-                    wrong: wrong,
-                    percent: percent,
-                    total: total,
-                    maxBall: total * BALL_PER,
-                    timestamp: Date.now()
-                };
+                const percent = Math.round((correct / totalQuestions) * 100);
                 
-                localStorage.setItem(TEST_COMPLETED_KEY + studentId, 'true');
-                localStorage.setItem('exam_results_' + studentId, JSON.stringify(results));
-
-                // Natijalarni ko'rsatish
-                showResults(results);
-            }
-
-            // Natijalarni ko'rsatish
-            function showResults(results) {
+                document.getElementById('resultFullName').textContent = `${firstName.value} ${lastName.value}`;
+                document.getElementById('resultBall').textContent = `${ball} / ${totalQuestions * BALL_PER}`;
+                document.getElementById('resultCorrect').textContent = `${correct} / ${totalQuestions}`;
+                document.getElementById('resultPercent').textContent = percent + '%';
+                
                 testSection.classList.remove('active');
-                loginSection.style.display = 'none';
                 resultsSection.classList.add('active');
-                
-                document.getElementById('resultFullName').textContent = results.studentName;
-                document.getElementById('resultBall').textContent = `${results.ball} / ${results.maxBall}`;
-                document.getElementById('resultCorrect').textContent = `${results.correct} / ${results.total}`;
-                document.getElementById('resultWrong').textContent = results.wrong;
-                document.getElementById('resultPercent').textContent = results.percent + '%';
-            }
-
-            // Loginni tekshirish
-            function handleLogin() {
-                const first = firstName.value.trim();
-                const last = lastName.value.trim();
-
-                if (!first || !last) {
-                    loginError.textContent = 'Iltimos, ism va familyani kiriting';
+                studentInfo.style.display = 'none';
+            } else {
+                if (userAnswers[currentIndex] === null) {
+                    alert('Iltimos, avval bu savolga javob bering!');
                     return;
                 }
-
-                const studentId = `${first}_${last}`.toLowerCase().replace(/\s+/g, '_');
-
-                // Deadline tekshirish
-                if (!checkDeadline()) {
-                    loginError.textContent = 'Test vaqti tugagan';
-                    return;
-                }
-
-                // Talaba avval test topshirganmi?
-                if (hasStudentCompleted(studentId)) {
-                    loginError.textContent = 'Siz allaqachon test topshirgansiz!';
-                    
-                    const savedResults = localStorage.getItem('exam_results_' + studentId);
-                    if (savedResults) {
-                        loginSection.style.display = 'none';
-                        showResults(JSON.parse(savedResults));
-                    }
-                    return;
-                }
-
-                // Yangi talaba
-                currentStudent = saveStudentData(first, last);
-                
-                // FOYDALANUVCHI UCHUN ARALASHTIRILGAN SAVOLLARNI OLISH
-                shuffledQuestions = getUserQuestions(studentId);
-                
-                // Headerda ismni ko'rsatish
-                headerStudentName.textContent = `${first} ${last}`;
-                studentInfo.style.display = 'flex';
-                
-                // Loginni yashirib, testni ko'rsatish
-                loginSection.style.display = 'none';
-                testSection.classList.add('active');
-                
-                // Testni boshlash
-                renderQuestion();
-                updateUI();
-                
-                console.log(`${first} ${last} uchun aralashtirilgan savollar tayyor!`);
-            }
-
-            // Test funksiyalari
-            function calcBall() {
-                return answerStatus.filter(s => s === 'correct').length * BALL_PER;
-            }
-
-            function updateUI() {
-                const ball = calcBall();
-                
-                const correctCount = answerStatus.filter(s => s === 'correct').length;
-                const amp = (ball / (total * BALL_PER) * 20).toFixed(1);
-                document.getElementById('currentAmp').innerText = amp;
-                
-                document.getElementById('questionCounter').innerText = `${currentIndex + 1}/${total}`;
-                
-                const progress = ((currentIndex + 1) / total) * 100;
-                document.getElementById('progressFill').style.width = progress + '%';
-
-                if (currentIndex === total - 1) {
-                    nextBtn.textContent = '🏁 Testni yakunlash';
-                    nextBtn.classList.add('finish-btn');
-                } else {
-                    nextBtn.textContent = 'Keyingi ▶';
-                    nextBtn.classList.remove('finish-btn');
-                }
-            }
-
-            function selectOption(idx) {
-                if (userAnswers[currentIndex] !== null) return;
-
-                const q = shuffledQuestions[currentIndex];
-                const isCorrect = (idx === q.correct);
-                userAnswers[currentIndex] = idx;
-                answerStatus[currentIndex] = isCorrect ? 'correct' : 'wrong';
-
+                currentIndex++;
                 renderQuestion();
                 updateUI();
             }
+        }
 
-            function renderQuestion() {
-                const q = shuffledQuestions[currentIndex];
-                document.getElementById('questionBadge').innerText = `${currentIndex + 1}-savol`;
-                document.getElementById('questionText').innerText = q.question;
+        function goPrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+                updateUI();
+            }
+        }
 
-                const selected = userAnswers[currentIndex];
-                const status = answerStatus[currentIndex];
-                const letters = ['A', 'B', 'C', 'D'];
+        function handleLogin() {
+            const first = firstName.value.trim();
+            const last = lastName.value.trim();
 
-                let html = '';
-                q.options.forEach((opt, idx) => {
-                    let optClass = 'option';
-                    if (selected !== null && idx === selected) {
-                        optClass += status === 'correct' ? ' correct' : ' wrong';
-                    }
-                    html += `
-                        <div class="${optClass}" data-index="${idx}">
-                            <span class="option-prefix">${letters[idx]}</span>
-                            <span class="option-text">${opt}</span>
-                        </div>
-                    `;
-                });
-
-                document.getElementById('optionsContainer').innerHTML = html;
-
-                document.querySelectorAll('.option').forEach(opt => {
-                    opt.addEventListener('click', () => {
-                        const idx = opt.dataset.index;
-                        if (idx) selectOption(parseInt(idx));
-                    });
-                });
-
-                prevBtn.disabled = currentIndex === 0;
+            if (!first || !last) {
+                loginError.textContent = 'Iltimos, ism va familyani kiriting';
+                return;
             }
 
-            function goNext() {
-                if (currentIndex === total - 1) {
-                    if (userAnswers[currentIndex] === null) {
-                        alert('Iltimos, avval bu savolga javob bering!');
-                        return;
-                    }
-                    completeTest();
-                } else {
-                    if (userAnswers[currentIndex] === null) {
-                        alert('Iltimos, avval bu savolga javob bering!');
-                        return;
-                    }
-                    currentIndex++;
-                    renderQuestion();
-                    updateUI();
-                }
+            if (!checkDeadline()) {
+                loginError.textContent = 'Test vaqti tugagan';
+                return;
             }
 
-            function goPrev() {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    renderQuestion();
-                    updateUI();
-                }
-            }
-
-            // Event listenerlar
-            startBtn.addEventListener('click', startDeadline);
-            loginBtn.addEventListener('click', handleLogin);
-            nextBtn.addEventListener('click', goNext);
-            prevBtn.addEventListener('click', goPrev);
-
-            [firstName, lastName].forEach(input => {
-                input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') handleLogin();
-                });
-            });
-
-            window.addEventListener('load', function() {
-                checkDeadline();
-            });
+            currentStudent = { firstName: first, lastName: last };
+            shuffledQuestions = shuffleQuestions();
             
-            window.addEventListener('storage', function(e) {
-                if (e.key === DEADLINE_KEY) {
-                    checkDeadline();
-                }
-            });
+            headerStudentName.textContent = `${first} ${last}`;
+            studentInfo.style.display = 'flex';
+            
+            loginSection.style.display = 'none';
+            testSection.classList.add('active');
+            
+            renderQuestion();
+            updateUI();
+        }
 
-            checkDeadline();
-        })();
+        // Admin login
+        function adminLogin() {
+            const pass = adminPassword.value.trim();
+            if (pass === ADMIN_PASSWORD) {
+                isAdmin = true;
+                adminModal.classList.remove('active');
+                adminSection.classList.add('active');
+                adminPassword.value = '';
+                adminLoginError.textContent = '';
+            } else {
+                adminLoginError.textContent = '❌ Parol noto\'g\'ri';
+            }
+        }
+
+        function adminLogout() {
+            isAdmin = false;
+            adminSection.classList.remove('active');
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        startBtn.addEventListener('click', () => startDeadline(1));
+        
+        loginBtn.addEventListener('click', handleLogin);
+        nextBtn.addEventListener('click', goNext);
+        prevBtn.addEventListener('click', goPrev);
+
+        adminLoginBtn.addEventListener('click', () => {
+            adminModal.classList.add('active');
+            adminPassword.value = '';
+        });
+
+        adminLoginConfirm.addEventListener('click', adminLogin);
+        adminLoginCancel.addEventListener('click', () => adminModal.classList.remove('active'));
+        adminLogoutBtn.addEventListener('click', adminLogout);
+
+        set1HourBtn.addEventListener('click', () => setDeadline(1));
+        set2HourBtn.addEventListener('click', () => setDeadline(2));
+        set3HourBtn.addEventListener('click', () => setDeadline(3));
+        add10MinBtn.addEventListener('click', () => addMinutes(10));
+        pauseTimerBtn.addEventListener('click', pauseTimer);
+        resumeTimerBtn.addEventListener('click', resumeTimer);
+        stopTimerBtn.addEventListener('click', stopTimer);
+
+        [firstName, lastName].forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+        });
+
+        // Boshlang'ich tekshirish
+        checkDeadline();
     </script>
 </body>
 </html>
