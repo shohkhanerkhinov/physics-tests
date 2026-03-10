@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Fizika test | Yarimo'tkazgichlar</title>
+    <title>⚡ Fizika test | Magnit maydon</title>
     <style>
+        /* (CSS avvalgi bilan bir xil) */
         * {
             margin: 0;
             padding: 0;
@@ -632,7 +633,7 @@
     <div class="phone-frame">
         <div class="header">
             <div class="title">
-                <h1>⚡Yarimo'tkazgichlar</h1>
+                <h1>⚡Magnit maydon</h1>
             </div>
             <div style="display: flex; gap: 8px;">
                 <div class="student-info" id="studentInfo" style="display: none;">
@@ -667,7 +668,7 @@
             
             <div class="admin-buttons">
                 <button class="admin-btn success" id="set1HourBtn">⏱️ 1 soat</button>
-                <button class="admin-btn" id="set2HourBtn">⏱️ 2 soat</button>
+                <button class="admin-btn success" id="set2HourBtn">⏱️ 2 soat</button>
                 <button class="admin-btn" id="set3HourBtn">⏱️ 3 soat</button>
                 <button class="admin-btn" id="add10MinBtn">➕ 10 min</button>
                 <button class="admin-btn" id="pauseTimerBtn">⏸️ Pauza</button>
@@ -714,10 +715,10 @@
         <div class="test-section" id="testSection">
             <div class="progress">
                 <div class="progress-row">
-                    <span id="questionCounter">1/20</span>
+                    <span id="questionCounter">1/15</span>
                 </div>
                 <div class="bar-bg">
-                    <div class="bar-fill" id="progressFill" style="width: 5%;"></div>
+                    <div class="bar-fill" id="progressFill" style="width: 6.6%;"></div>
                 </div>
             </div>
 
@@ -745,12 +746,12 @@
                 
                 <div class="result-row">
                     <span class="result-label">To'plangan ball:</span>
-                    <span class="result-value" id="resultBall">0 / 40</span>
+                    <span class="result-value" id="resultBall">0 / 30</span>
                 </div>
                 
                 <div class="result-row">
                     <span class="result-label">To'g'ri javoblar:</span>
-                    <span class="result-value" id="resultCorrect">0 / 20</span>
+                    <span class="result-value" id="resultCorrect">0 / 15</span>
                 </div>
                 
                 <div class="result-row">
@@ -765,202 +766,162 @@
         </div>
 
         <div class="footer">
-            Yarimo'tkazgichlar | p-n o'tish | 2 ball
+            Magnit maydon | Amper kuchi | 2 ball
         </div>
     </div>
 
     <script>
-        // ==================== TEST SAVOLLARI (20 ta) ====================
+        // ==================== TEST SAVOLLARI (15 ta) ====================
         const questions = [
             {
-                question: "Elektr toki deb nimaga aytiladi?",
+                question: "Magnit maydon kuch chiziqlari bizga nega kerak?",
                 options: [
-                    "A) Elektronlarning tartibli harakati",
-                    "B) Protonlarning harakati", 
-                    "C) Elektronlarning tasodifiy harakati",
-                    "D) protonlarning boshqarilmas harakati"
+                    "A) Magnit maydonni tasavvur qila olish uchun",
+                    "B) magnit maydon fazoning qaysi qismida katta yoki kichik ekanini aniqlash uchun",
+                    "C) Magnit induksiya vektorini yo'nalishini aniqlash uchun",
+                    "D) barcha javoblar to'g'ri"
+                ],
+                correct: 3
+            },
+            {
+                question: "Magnit induksiya vektorining birligini belgilang",
+                options: [
+                    "A) Tesla",
+                    "B) Farad",
+                    "C) Amper",
+                    "D) Veber"
                 ],
                 correct: 0
             },
             {
-                question: "Metallarda elektr tokini kimlar tashiydi?",
+                question: "Magnit maydonni nimalar hosil qiladi?",
                 options: [
-                    "A) Erkin elektronlar",
-                    "B) musbat va manfiy ionlar",
-                    "C) teng miqdorda kovaklar va elektronlar",
-                    "D) asosan kovaklar"
+                    "A) Harakatdagi zaryadli zarralar, tokli o'tkazgich, doimiy magnitlar, o'zgaruvchan tok o'tayotgan o'tkazgich",
+                    "B) Harakatdagi va tinch turgan zaryadli zarralar, tokli o'tkazgich, doimiy magnitlar",
+                    "C) Harakatdagi zaryadli zarralar, tokli o'tkazgich, doimiy magnitlar, dielektrik moddalar",
+                    "D) Harakatdagi zaryadli zarralar, tokli o'tkazgich, doimiy magnitlar, neytronlar oqimi"
                 ],
                 correct: 0
             },
             {
-                question: "Ohm qonuni qanday ifodalanadi?",
+                question: "Aylanma tokning magnit induksiya vektori qaysi formula bilan aniqlanadi?",
                 options: [
-                    "A) I = R × U",
-                    "B) I = U / R",
-                    "C) I = U × R",
-                    "D) I = U + R"
+                    "A) B = μ₀I / (2πr)",
+                    "B) B = μ₀I / (2R)",
+                    "C) B = μ₀I / (2πR)",
+                    "D) B = μ₀I × 2R"
                 ],
                 correct: 1
             },
             {
-                question: "Metallarda qarshilik qanday o‘zgaradi, agar metallning uzunligi ortsa?",
+                question: "To'g'ri tokning magnit induksiya vektori qaysi formula bilan aniqlanadi?",
                 options: [
-                    "A) Qarshilik kamayadi",
-                    "B) Qarshilik o‘zgarmaydi",
-                    "C) Qarshilik ortadi",
-                    "D) Hech qanday o‘zgarish bo‘lmaydi"
-                ],
-                correct: 2
-            },
-            {
-                question: "Yarimo‘tkazgichlarda elektr toki nima tomonidan tashiladi?",
-                options: [
-                    "A) Elektronlar",
-                    "B) Protonlar",
-                    "C) electron va kovaklar",
-                    "D) musbat va manfiy ionlar"
-                ],
-                correct: 2
-            },
-            {
-                question: "4-guruh elementlariga 5-guruh elementlari qo‘shilsa, qanday o'tkazuvchanlik hosil bo‘ladi?",
-                options: [
-                    "A) Donor o'tkazuvchanligi",
-                    "B) Akseptor o'tkazuvchanligi",
-                    "C) n-turi o'tkazuvchanlik",
-                    "D) A va C javob to'g'ri"
-                ],
-                correct: 3
-            },
-            {
-                question: "4-guruh elementlariga 3-guruh elementlari qo‘shilsa, qanday o'tkazuvchanlik hosil bo‘ladi?",
-                options: [
-                    "A) Donor o'tkazuvchanligi",
-                    "B) Akseptor o'tkazuvchanligi",
-                    "C) p-turi o'tkazuvchanlik",
-                    "D) B va C javob to'g'ri"
-                ],
-                correct: 3
-            },
-            {
-                question: "Toza yarimo‘tkazgichda elektr toki kim tomonidan tashiladi?",
-                options: [
-                    "A) Elektronlar",
-                    "B) teng miqdorda musbat va manfiy ionlar",
-                    "C) teng miqdorda elektronlar va kovaklar",
-                    "D) protonlar va elektronlar"
-                ],
-                correct: 2
-            },
-            {
-                question: "Donor aralashma nima?",
-                options: [
-                    "A) 4 va 5 guruh elementlarini qo'shilishidan hosil bo'lgan aralashma",
-                    "B) erkin elektroni ko'p bo'lgan aralashma",
-                    "C) Yarimo'tkazgichni n-turi o'tkazuvchanligiga olib keladigan aralashma",
-                    "D) barcha javob to'g'ri"
-                ],
-                correct: 3
-            },
-            {
-                question: "Akseptor aralashma nima?",
-                options: [
-                    "A) 4 va 5 guruh elementlarini qo'shilishidan hosil bo'lgan aralashma",
-                    "B) erkin elektroni ko'p bo'lgan aralashma",
-                    "C) Yarimo'tkazgichni p-turi o'tkazuvchanligiga olib keladigan aralashma",
-                    "D) barcha javob to'g'ri"
-                ],
-                correct: 2
-            },
-            {
-                question: "Dielektrik nima?",
-                options: [
-                    "A) Elektr toki o‘tkazmaydigan material",
-                    "B) Elektr toki yaxshi o‘tkazadigan material",
-                    "C) Elektr toki o‘tkazuvchi suyuqlik",
-                    "D) Elektr toki o‘tkazmaydigan gaz"
+                    "A) B = μ₀I / (2πr)",
+                    "B) B = μ₀I / (2R)",
+                    "C) B = μ₀I / (2πR)",
+                    "D) B = μ₀I × 2πr"
                 ],
                 correct: 0
             },
             {
-                question: "Suyuqliklarda elektr toki kim tomonidan tashiladi?",
+                question: "Solenoidning magnit induksiya vektori qaysi formula bilan aniqlanadi?",
                 options: [
-                    "A) Elektronlar",
-                    "B) musbat zaryadlangan ionlar",
-                    "C) manfiy zaryadlangan ionlar",
-                    "D) musbat va manfiy ionlar"
+                    "A) B = μ₀I / (2πr)",
+                    "B) B = μ₀I / (2R)",
+                    "C) B = μ₀I × N / l",
+                    "D) B = μ₀I × N / (2πr)"
                 ],
-                correct: 3
+                correct: 2
             },
             {
-                question: "Musbat ion nima?",
+                question: "To'g'ri tokning Magnit induksiya vektori qanday aniqlanadi?",
                 options: [
-                    "A) Elektronlarni beruvchi zaryadlangan zarracha",
-                    "B) Elektronlarni qabul qiluvchi zaryadlangan zarracha",
-                    "C) Neutrallangan zarracha",
-                    "D) protoni elektroniga nisbatan kop bolgan atom"
-                ],
-                correct: 3
-            },
-            {
-                question: "Vakuumda elektr toki qanday hosil bo‘ladi?",
-                options: [
-                    "A) Elektronlarning vakuum orqali harakati",
-                    "B) musbat zaryadli ionlarning harakati",
-                    "C) umumiy tokning o‘zgarishi",
-                    "D) Elektron va fotonlar to‘qnashuvi"
-                ],
-                correct: 0
-            },
-            {
-                question: "Rentgen apparatida elektr toki qaysi muhit asosida hosil qilinadi?",
-                options: [
-                    "A) Vakuum",
-                    "B) Suyuqlik",
-                    "C) G'ovakli materiallar",
-                    "D) Yassi plitalar"
-                ],
-                correct: 0
-            },
-            {
-                question: "Uzunligi 50 m bo‘lgan mis simning ko‘ndalang kesim yuzi 2 mm². Agar unga 12 V kuchlanish berilsa, zanjirdan o‘tadigan tokni toping. (ρ = 1.7 × 10⁻⁸ Ω·m)",
-                options: [
-                    "A) 28 A",
-                    "B) 14 A",
-                    "C) 56 A",
-                    "D) 13 A"
-                ],
-                correct: 0
-            },
-            {
-                question: "Qarshiligi 10 Ω bo‘lgan o‘tkazgichdan 5 A tok 2 minut davomida o‘tsa, ajralib chiqadigan issiqlik miqdorini toping",
-                options: [
-                    "A) 60 kJ",
-                    "B) 30 kJ",
-                    "C) 6 kJ",
-                    "D) 3 kJ"
+                    "A) O'ng qo'limiz bosh barmoq 90° ga ochiladi to'rtala barmoq tok yo'nalishiga qo'yilganda bosh barmoq B ni yo'nalishini ko'rsatadi",
+                    "B) O'ng qo'limizni bosh barmog'i tok yo'nalishiga qo'yiladi va yarim bukilgan to'rtala barmoq bilan o'tkazgich ushlanganda yarim bukilgan to'rtala barmoq B ni yo'nalishini ko'rsatadi",
+                    "C) O'ng qo'limizni yarim bukilgan to'rtala barmog'i tok yo'nalishiga qo'yiladi va bosh barmoq B ni yo'nalishini ko'rsatadi",
+                    "D) Chap qo'limizni bosh barmog'i tok yo'nalishiga qo'yiladi va yarim bukilgan to'rtala barmoq bilan o'tkazgich ushlanganda B ni yo'nalishini ko'rsatadi"
                 ],
                 correct: 1
             },
             {
-                question: "Gaz razryad naychasida 0.02 A tok oqmoqda. Agar har bir ionning zaryadi 1.6 × 10⁻¹⁹ C bo‘lsa, 1 sekundda naychadan nechta zaryad tashuvchi o‘tadi?",
+                question: "Amper kuchiga ta'rif bering?",
                 options: [
-                    "A) 2.25 × 10¹⁷",
-                    "B) 1.25 × 10¹⁹",
-                    "C) 1.25 × 10¹⁷",
-                    "D) 2.25 × 10¹⁷"
+                    "A) Tokli o'tkazgich atrofida paydo bo'ladigan kuch",
+                    "B) Tokli o'tkazgichga magnit maydon tomonidan ta'sir qiluvchi kuch",
+                    "C) Tokli o'tkazgichga elektr maydon tomonidan ta'sir qiluvchi kuch",
+                    "D) zaryadli zarrachaga magnit maydon tomonidan ta'sir qiluvchi kuch"
                 ],
-                correct: 2
+                correct: 1
             },
             {
-                question: "Agar yarimo‘tkazgichdan 4 A tok o‘tsa, 10 sekund ichida o‘tgan elektronlar sonini toping. (e = 1.6 × 10⁻¹⁹ C)",
+                question: "Amper kuchining matematik ifodasi qanday?",
                 options: [
-                    "A) 2.5 × 10¹⁰",
-                    "B) 2.5 × 10¹⁵",
-                    "C) 2.5 × 10²⁰",
-                    "D) 2.5 × 10²⁵"
+                    "A) F = B·I·l·sinα",
+                    "B) F = B·I·l·cosα",
+                    "C) F = B·I·l·tgα",
+                    "D) F = B·I·l·ctgα"
                 ],
-                correct: 2
+                correct: 0
+            },
+            {
+                question: "Amper kuchi qanday aniqlanadi?",
+                options: [
+                    "A) O'ng qo'limiz kaftiga magnit induksiya vektori kiradigan qilib joylashtiramiz va to'rtala barmoq tokni yo'nalishiga moslab qo'yilganda 90° ga ochilgan bosh barmoq Amper kuchini yo'nalishini ko'rsatadi",
+                    "B) O'ng qo'limiz kaftini ustki qismiga magnit induksiya vektori kiradigan qilib joylashtiramiz va to'rtala barmoq tokni yo'nalishiga moslab qo'yilganda 90° ga ochilgan bosh barmoq Amper kuchini yo'nalishini ko'rsatadi",
+                    "C) O'ng qo'limiz kaftiga magnit induksiya vektori kiradigan qilib joylashtiramiz va to'rtala barmoq tokni yo'nalishiga qarama qarshi qo'yilganda 90° ga ochilgan bosh barmoq Amper kuchini yo'nalishini ko'rsatadi",
+                    "D) O'ng qo'limiz kaftiga magnit induksiya vektori kiradigan qilib joylashtiramiz va 90° ga ochilgan bosh barmoq tokni yo'nalishiga moslab qo'yilganda to'rtala barmoq Amper kuchini yo'nalishini ko'rsatadi"
+                ],
+                correct: 0
+            },
+            {
+                question: "Magnit maydon induksiyasi B = 0.5 Tesla bo'lgan maydonda uzunligi l = 0.2 m bo'lgan o'tkazgichdan I = 4 A tok o'tmoqda. O'tkazgichga ta'sir qiluvchi kuchni toping? (N) O'tkazgich magnit maydonga perpendikulyar joylashgan.",
+                options: [
+                    "A) 0.4",
+                    "B) 0.2",
+                    "C) 0.6",
+                    "D) 0.8"
+                ],
+                correct: 0
+            },
+            {
+                question: "O'tkazgich uzunligi 0.5 m. Undan I = 2 A tok o'tmoqda. Magnit maydon o'tkazgichga F = 0.2 N kuch bilan ta'sir qiladi. magnit induksiya vektorini aniqlang? O'tkazgich maydonga perpendikulyar.",
+                options: [
+                    "A) 0.4 T",
+                    "B) 0.2 T",
+                    "C) 0.6 T",
+                    "D) 0.8 T"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cheksiz uzun to'g'ri o'tkazgichdan I = 10 A tok o'tmoqda. O'tkazgichdan r = 5 cm masofada joylashgan nuqtadagi Magnit induksiyasini toping? (tesla) (μ₀ = 4π × 10⁻⁷)",
+                options: [
+                    "A) 4×10⁻⁵",
+                    "B) 2×10⁻⁵",
+                    "C) 4×10⁻⁶",
+                    "D) 2×10⁻⁶"
+                ],
+                correct: 0
+            },
+            {
+                question: "Radiusi R = 10 cm bo'lgan aylana o'tkazgichdan I = 5 A tok o'tmoqda. Aylananing markazidagi Magnit induksiya ni toping. (μ₀ = 4π × 10⁻⁷)",
+                options: [
+                    "A) 3×10⁻⁵",
+                    "B) 2×10⁻⁵",
+                    "C) 3×10⁻⁶",
+                    "D) 2×10⁻⁶"
+                ],
+                correct: 0
+            },
+            {
+                question: "Uzun solenoidda o'ramlar soni N = 1000 ta. Solenoid uzunligi l = 0.5 m. Undan I = 2 A tok o'tmoqda. Solenoid ichidagi Magnit induksiya ni toping. (μ₀ = 4π × 10⁻⁷)",
+                options: [
+                    "A) 5×10⁻³",
+                    "B) 2×10⁻⁶",
+                    "C) 5×10⁻⁶",
+                    "D) 2×10⁻³"
+                ],
+                correct: 0
             }
         ];
 
