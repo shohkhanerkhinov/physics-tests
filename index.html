@@ -195,12 +195,12 @@
 
         .admin-btn {
             flex: 1;
-            min-width: 100px;
+            min-width: 90px;
             background: #2a4055;
             border: none;
             border-radius: 40px;
             padding: 12px 8px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: white;
             border: 2px solid #ff8888;
@@ -667,8 +667,9 @@
             
             <div class="admin-buttons">
                 <button class="admin-btn success" id="set1HourBtn">⏱️ 1 soat</button>
-                <button class="admin-btn" id="set2HourBtn">⏱️ 2 soat</button>
-                <button class="admin-btn" id="set3HourBtn">⏱️ 3 soat</button>
+                <button class="admin-btn success" id="set2HourBtn">⏱️ 2 soat</button>
+                <button class="admin-btn success" id="set3HourBtn">⏱️ 3 soat</button>
+                <button class="admin-btn success" id="set4HourBtn">⏱️ 4 soat</button>
                 <button class="admin-btn" id="add10MinBtn">➕ 10 min</button>
                 <button class="admin-btn" id="pauseTimerBtn">⏸️ Pauza</button>
                 <button class="admin-btn" id="resumeTimerBtn">▶️ Davom</button>
@@ -714,10 +715,10 @@
         <div class="test-section" id="testSection">
             <div class="progress">
                 <div class="progress-row">
-                    <span id="questionCounter">1/20</span>
+                    <span id="questionCounter">1/15</span>
                 </div>
                 <div class="bar-bg">
-                    <div class="bar-fill" id="progressFill" style="width: 5%;"></div>
+                    <div class="bar-fill" id="progressFill" style="width: 6.6%;"></div>
                 </div>
             </div>
 
@@ -745,12 +746,12 @@
                 
                 <div class="result-row">
                     <span class="result-label">To'plangan ball:</span>
-                    <span class="result-value" id="resultBall">0 / 40</span>
+                    <span class="result-value" id="resultBall">0 / 30</span>
                 </div>
                 
                 <div class="result-row">
                     <span class="result-label">To'g'ri javoblar:</span>
-                    <span class="result-value" id="resultCorrect">0 / 20</span>
+                    <span class="result-value" id="resultCorrect">0 / 15</span>
                 </div>
                 
                 <div class="result-row">
@@ -765,12 +766,12 @@
         </div>
 
         <div class="footer">
-            Yarimo'tkazgichlar | p-n o'tish | 2 ball
+            Yarimo'tkazgichlar | 2 ball | 15 savol
         </div>
     </div>
 
     <script>
-        // ==================== TEST SAVOLLARI (20 ta) ====================
+        // ==================== 15 TA NAZARIY SAVOL ====================
         const questions = [
             {
                 question: "Elektr toki deb nimaga aytiladi?",
@@ -921,46 +922,6 @@
                     "D) Yassi plitalar"
                 ],
                 correct: 0
-            },
-            {
-                question: "Uzunligi 50 m bo‘lgan mis simning ko‘ndalang kesim yuzi 2 mm². Agar unga 12 V kuchlanish berilsa, zanjirdan o‘tadigan tokni toping. (ρ = 1.7 × 10⁻⁸ Ω·m)",
-                options: [
-                    "A) 28 A",
-                    "B) 14 A",
-                    "C) 56 A",
-                    "D) 13 A"
-                ],
-                correct: 0
-            },
-            {
-                question: "Qarshiligi 10 Ω bo‘lgan o‘tkazgichdan 5 A tok 2 minut davomida o‘tsa, ajralib chiqadigan issiqlik miqdorini toping",
-                options: [
-                    "A) 60 kJ",
-                    "B) 30 kJ",
-                    "C) 6 kJ",
-                    "D) 3 kJ"
-                ],
-                correct: 1
-            },
-            {
-                question: "Gaz razryad naychasida 0.02 A tok oqmoqda. Agar har bir ionning zaryadi 1.6 × 10⁻¹⁹ C bo‘lsa, 1 sekundda naychadan nechta zaryad tashuvchi o‘tadi?",
-                options: [
-                    "A) 2.25 × 10¹⁷",
-                    "B) 1.25 × 10¹⁹",
-                    "C) 1.25 × 10¹⁷",
-                    "D) 2.25 × 10¹⁷"
-                ],
-                correct: 2
-            },
-            {
-                question: "Agar yarimo‘tkazgichdan 4 A tok o‘tsa, 10 sekund ichida o‘tgan elektronlar sonini toping. (e = 1.6 × 10⁻¹⁹ C)",
-                options: [
-                    "A) 2.5 × 10¹⁰",
-                    "B) 2.5 × 10¹⁵",
-                    "C) 2.5 × 10²⁰",
-                    "D) 2.5 × 10²⁵"
-                ],
-                correct: 2
             }
         ];
 
@@ -1019,6 +980,7 @@
         const set1HourBtn = document.getElementById('set1HourBtn');
         const set2HourBtn = document.getElementById('set2HourBtn');
         const set3HourBtn = document.getElementById('set3HourBtn');
+        const set4HourBtn = document.getElementById('set4HourBtn');
         const add10MinBtn = document.getElementById('add10MinBtn');
         const pauseTimerBtn = document.getElementById('pauseTimerBtn');
         const resumeTimerBtn = document.getElementById('resumeTimerBtn');
@@ -1357,6 +1319,7 @@
         set1HourBtn.addEventListener('click', () => setDeadline(1));
         set2HourBtn.addEventListener('click', () => setDeadline(2));
         set3HourBtn.addEventListener('click', () => setDeadline(3));
+        set4HourBtn.addEventListener('click', () => setDeadline(4));
         add10MinBtn.addEventListener('click', () => addMinutes(10));
         pauseTimerBtn.addEventListener('click', pauseTimer);
         resumeTimerBtn.addEventListener('click', resumeTimer);
